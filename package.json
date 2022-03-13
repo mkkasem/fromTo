@@ -1,7 +1,7 @@
 {
   "name": "fromTo",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/app.js",
   "repository": "https://github.com/mkkasem/fromTo.git",
   "author": "Mahmoud & Ihab",
   "license": "MIT",
