@@ -54,7 +54,6 @@ const verifySignUpData = async (data) => {
 };
 
 module.exports = {
-  buildPayload,
   confirmPassword,
   createToken,
   verifySignUpData,
