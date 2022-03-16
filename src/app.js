@@ -14,7 +14,9 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
-app.listen(port, () => {
+
+const server = app.listen(port, () => {
   console.log('app listening on port 3000!');
   connectToMongo();
 });
+module.exports = server;
