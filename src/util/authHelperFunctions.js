@@ -8,6 +8,7 @@ const buildPayload = (userData) => ({
     email: userData.email,
     firstName: userData.firstName,
     lastName: userData.lastName,
+    isAdmin: userData.isAdmin,
     _id: userData._id.toString(),
   },
 });

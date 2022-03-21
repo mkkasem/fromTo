@@ -7,17 +7,18 @@ const sessionNotFoundError = {
 };
 
 // eslint-disable-next-line consistent-return
-module.exports = function onlyAuthenticated(req, res, next) {
+module.exports = function onlyAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) return res.status(401).json(sessionNotFoundError);
-
   // eslint-disable-next-line consistent-return
   jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) return res.sendStatus(403);
 
-    req.user = payload.user;
+    if (!payload.user.isAdmin) return res.sendStatus(403);
+
+    req.admin = payload.user;
 
     next();
   });

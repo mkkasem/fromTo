@@ -14,7 +14,7 @@ async function savePost(req, type = 'create') {
       post.image = req.body?.image;
       post.price = req.body?.price;
       post.isSold = req.body?.isSold;
-      post.owner = req.user?.id;
+      post.owner = req.user?._id;
       break;
     case 'update':
       post.title = req.body?.title ?? post.title;
@@ -50,7 +50,7 @@ module.exports = {
     try {
       //  check authority for the user
       const post = await Post.findById(id);
-      if (id && req.user.id === post.owner.toString()) {
+      if (id && req.user._id === post.owner.toString()) {
         req.post = await Post.findById(id);
         const updatedPost = await savePost(req, 'update');
         return res.status(201).json(updatedPost);
@@ -65,7 +65,7 @@ module.exports = {
     try {
       //  check authority for the user
       const post = await Post.findById(id);
-      if (id && req.user.id === post.owner.toString()) {
+      if (id && req.user._id === post.owner.toString()) {
         const deletedPost = await Post.findByIdAndDelete(id);
         return res.status(200).json(deletedPost);
       }
@@ -82,7 +82,7 @@ module.exports = {
       const newComment = {
         text,
         //  user should be signed in and authenticated
-        creator: req?.user?.id ?? null,
+        creator: req?.user?._id ?? null,
       };
       post.comments.push(newComment);
       const updatedPost = await post.save();
@@ -98,7 +98,7 @@ module.exports = {
       const post = await Post.findById(id);
       const comment = post.comments.find((c) => c.id === commentid);
       //  check authority for the user
-      if (id && req.user.id === comment.creator.toString()) {
+      if (id && req.user._id === comment.creator.toString()) {
         comment.text = text;
         const updatedPost = await post.save();
         return res.status(201).json(updatedPost);
@@ -113,7 +113,7 @@ module.exports = {
     try {
       const post = await Post.findById(id);
       const comment = post.comments.find((c) => c.id === commentid);
-      if (id && req.user.id === comment.creator.toString()) {
+      if (id && req.user._id === comment.creator.toString()) {
         const indexOfComment = post.comments.indexOf(comment);
         post.comments.splice(indexOfComment, 1);
         const updatedPost = await post.save();
@@ -131,7 +131,7 @@ module.exports = {
     const query = {};
     if (req.user) {
       // find user's intrests
-      const user = await UserModel.findById(req.user.id);
+      const user = await UserModel.findById(req.user._id);
       // if user has no intrests then get all posts ordered by date
       if (!user.tags.length) {
         filterPosts(res, query);
@@ -161,16 +161,9 @@ module.exports = {
     }
   },
   addNewPost: async (req, res) => {
-    /*
-    To add post the user needs to be registered(onlyAtuhenticated middleware check that)
-    All necessary validations are handled by quesion model
-    so we can save new post directly
-    */
-    const postData = req.body;
-    // Assign the new post to the current user
-    postData.user = req.user.id;
     try {
-      const newPost = await Post.create(postData);
+      req.post = new Post();
+      const newPost = await savePost(req);
       res.status(201).json(newPost);
     } catch (err) {
       res.status(403).json({ message: err.message });
