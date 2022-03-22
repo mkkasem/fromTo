@@ -1,5 +1,5 @@
 const Post = require('../models/post');
-const { UserModel } = require('../models/user');
+const User = require('../models/user');
 
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
@@ -124,28 +124,28 @@ module.exports = {
       return res.status(403).json(error);
     }
   },
-  getAllPosts: async (req, res) => {
-    /* test if it's registered user then get all the posts
-      related to the interested tags of the user
-     */
-    const query = {};
-    if (req.user) {
-      // find user's intrests
-      const user = await UserModel.findById(req.user._id);
-      // if user has no intrests then get all posts ordered by date
-      if (!user.tags.length) {
-        filterPosts(res, query);
-      } else {
-        const tags = user.tags.map((tag) => tag.title);
-        query['tags.title'] = { $in: tags };
-        filterPosts(res, query);
-      }
-    }
-    // if not registered user get all posts ordered by date (recent posts)
-    else {
-      filterPosts(res, query);
-    }
-  },
+  // getAllPosts: async (req, res) => {
+  //   /* test if it's registered user then get all the posts
+  //     related to the interested tags of the user
+  //    */
+  //   const query = {};
+  //   if (req.user) {
+  //     // find user's intrests
+  //     const user = await User.findById(req.user._id);
+  //     // if user has no intrests then get all posts ordered by date
+  //     if (!user.tags.length) {
+  //       filterPosts(res, query);
+  //     } else {
+  //       const tags = user.tags.map((tag) => tag.title);
+  //       query['tags.title'] = { $in: tags };
+  //       filterPosts(res, query);
+  //     }
+  //   }
+  //   // if not registered user get all posts ordered by date (recent posts)
+  //   else {
+  //     filterPosts(res, query);
+  //   }
+  // },
 
   getOnePost: async (req, res) => {
     const { id } = req.params;
@@ -164,15 +164,15 @@ module.exports = {
     try {
       req.post = new Post();
       const newPost = await savePost(req);
-    /*
+      /*
     To add post the user needs to be registered(onlyAtuhenticated middleware check that)
     All necessary validations are handled by quesion model
     so we can save new post directly
     */
-    const postData = req.body;
-    // Assign the new post to the current user
-    postData.user = req.user.id;
-     res.status(201).json(newPost);
+      const postData = req.body;
+      // Assign the new post to the current user
+      postData.user = req.user.id;
+      res.status(201).json(newPost);
     } catch (err) {
       res.status(403).json({ message: err.message });
     }
