@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const logger = require('../services/logger');
 require('dotenv').config();
 
 // Use a separate test db when running jest
@@ -13,11 +13,11 @@ const connectToMongo = () => {
   const db = mongoose.connection;
 
   db.once('open', () => {
-    console.log(`Database connected to: ${url}`);
+    logger.info(`Database connected to: ${url}`);
   });
 
   db.on('error', (err) => {
-    console.log(`Database connection error: ${err}`);
+    logger.error(`Database connection error: ${err}`);
   });
 };
 
