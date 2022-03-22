@@ -164,7 +164,15 @@ module.exports = {
     try {
       req.post = new Post();
       const newPost = await savePost(req);
-      res.status(201).json(newPost);
+    /*
+    To add post the user needs to be registered(onlyAtuhenticated middleware check that)
+    All necessary validations are handled by quesion model
+    so we can save new post directly
+    */
+    const postData = req.body;
+    // Assign the new post to the current user
+    postData.user = req.user.id;
+     res.status(201).json(newPost);
     } catch (err) {
       res.status(403).json({ message: err.message });
     }
