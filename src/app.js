@@ -5,7 +5,6 @@ const app = express();
 const userRouter = require('./routers/user');
 const postRouter = require('./routers/post');
 const indexRouter = require('./routers/index');
-
 const authRouter = require('./routers/auth');
 
 const { connectToMongo } = require('./db/connection');

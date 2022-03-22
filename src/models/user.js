@@ -3,7 +3,9 @@ const isImageUrl = require('is-image-url');
 
 const validator = (url) => isImageUrl(url);
 const imageValidator = [validator, 'Please enter a valid image URL!'];
+
 const { Schema } = mongoose;
+
 // raters schema to be embedded in user schema
 const rates = {
   rate: {
@@ -55,11 +57,27 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Phone is required'],
   },
-  acceptTerms: {
-    type: Boolean,
-  },
   posts: [{ type: Schema.Types.ObjectId, ref: process.env.POST_MODEL_NAME }],
   rates: [rates],
+});
+
+userSchema
+  .virtual('fullName')
+  .get(function () {
+    return `${this.firstName} ${this.lastName}`;
+  })
+  .set(function (fullName) {
+    this.set('firstName', fullName.substr(0, fullName.indexOf(' ')));
+    this.set('lastName', fullName.substr(fullName.indexOf(' ') + 1));
+  });
+
+// Prevent password to send witht the response
+userSchema.set('toJSON', {
+  transform(doc, ret) {
+    // eslint-disable-next-line no-param-reassign
+    delete ret.password_hash;
+    return ret;
+  },
 });
 
 const modelName = process.env.USER_MODEL_NAME;
