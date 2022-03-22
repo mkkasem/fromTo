@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const logger = require('./logger');
 
 module.exports = {
   sendEmail: async (emailOptions) => {
@@ -8,14 +9,14 @@ module.exports = {
         port: 587,
         secure: false,
         auth: {
-          user: 'fromtopteam@gmail.com',
-          pass: 'fromto2022',
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
         },
       });
       const res = await transporter.sendMail(emailOptions);
       return res;
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       return error;
     }
   },
