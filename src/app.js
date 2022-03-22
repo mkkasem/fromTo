@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 
 const app = express();
+const cookieParser = require('cookie-parser');
 const userRouter = require('./routers/user');
 const postRouter = require('./routers/post');
 const indexRouter = require('./routers/index');
@@ -12,6 +13,7 @@ const logger = require('./services/logger');
 
 const port = process.env.NODE_LOCAL_PORT || 3000;
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
