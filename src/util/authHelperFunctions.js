@@ -38,11 +38,8 @@ const createToken = (user, rememberMe, res) => {
 };
 
 const verifySignUpData = async (data) => {
-  const { username, email, password, passwordConfirm, acceptTerms } = data;
+  const { username, email, password, passwordConfirm } = data;
 
-  if (!acceptTerms) {
-    throw new Error('You must accept the terms and conditions');
-  }
   if (await User.exists({ username })) {
     throw new Error('Username already used');
   }
