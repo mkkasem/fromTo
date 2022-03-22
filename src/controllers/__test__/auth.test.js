@@ -62,16 +62,7 @@ const userWithNotMatchingPasswords = {
   phone: '+90535555555',
   acceptTerms: true,
 };
-const userNotAcceptTerms = {
-  username: 'ali.hasan',
-  firstName: 'hasan',
-  lastName: 'bey',
-  email: 'ali1997@gmail.com',
-  password: 'Password1234',
-  passwordConfirm: 'Password1234',
-  phone: '+90535555555',
-  acceptTerms: false,
-};
+
 beforeAll(async () => {
   await clearDatabase();
 });
@@ -162,16 +153,6 @@ describe('Auth Endpoints', () => {
       expect(res.header.location).toBe(undefined);
       expect(res.statusCode).toBe(422);
       expect(res.text).toMatch(/Passwords do not match/i);
-    });
-
-    test('Should throw an error if the user does not accept terms', async () => {
-      const res = await request(server)
-        .post('/api/auth/signup')
-        .send(userNotAcceptTerms);
-
-      expect(res.header.location).toBe(undefined);
-      expect(res.statusCode).toBe(422);
-      expect(res.text).toMatch(/You must accept the terms and conditions/i);
     });
   });
 });
