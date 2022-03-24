@@ -25,8 +25,12 @@ const postSchema = new Schema(
       ],
       required: [true, 'Item title is required'],
     },
-    description: {
+    type: {
       type: String,
+      required: [true, 'Type is required'],
+    },
+    description: {
+      type: Object,
       required: [true, 'Description is required'],
     },
     isSold: {

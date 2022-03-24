@@ -4,13 +4,21 @@ const { UserModel } = require('../models/user');
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
 const randomError = { message: 'something went wrong' };
+const ItemFactory = require('../item factory/itemFactory');
 
+const itemFactory = new ItemFactory();
 async function savePost(req, type = 'create') {
   let { post } = req;
   switch (type) {
     case 'create':
       post.title = req.body?.title;
-      post.description = req.body?.description;
+      post.type = req.body?.type;
+
+      post.description = itemFactory.createItem(
+        req.body?.type,
+        req.body?.description
+      );
+
       post.image = req.body?.image;
       post.price = req.body?.price;
       post.isSold = req.body?.isSold;
@@ -18,7 +26,12 @@ async function savePost(req, type = 'create') {
       break;
     case 'update':
       post.title = req.body?.title ?? post.title;
-      post.description = req.body?.description ?? post.description;
+      post.type = req.body?.type;
+
+      post.description =
+        itemFactory.createItem(req.body?.type, req.body?.description) ??
+        itemFactory.createItem(post.type, post.description);
+
       post.image = req.body?.image ?? post.image;
       post.price = req.body?.price ?? post.price;
       post.isSold = req.body?.isSold ?? post.isSold;
