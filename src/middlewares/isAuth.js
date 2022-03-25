@@ -1,24 +1,19 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-//  error messages
-const sessionNotFoundError = {
-  meesage: 'you are not signed in. Please sign in',
-};
-
 // eslint-disable-next-line consistent-return
-module.exports = function onlyAuthenticated(req, res, next) {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (token == null) return res.status(401).json(sessionNotFoundError);
-
-  // eslint-disable-next-line consistent-return
-  jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
-    if (err) return res.sendStatus(403);
-
-    req.user = payload.user;
-
+module.exports = (req, res, next) => {
+  const { token } = req.cookies;
+  try {
+    const { user } = jwt.verify(token, process.env.JWT_SECRET);
+    // if verified pass the user to the next function with the req object
+    req.user = user;
     next();
-  });
+  } catch (error) {
+    // delete the token when it is invalid
+    res.clearCookie('token');
+    return res.status(401).json({
+      message: 'You are not authenticated',
+    });
+  }
 };
