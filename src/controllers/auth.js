@@ -53,8 +53,14 @@ const signOut = (req, res) => {
   }
 };
 
+const googleCallBack = async (req, res) => {
+  createToken(req.user, false, res);
+  res.redirect('/');
+};
+
 module.exports = {
   signIn,
   signUp,
   signOut,
+  googleCallBack,
 };

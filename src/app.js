@@ -3,17 +3,21 @@ require('dotenv').config();
 
 const app = express();
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+
 const userRouter = require('./routers/user');
 const postRouter = require('./routers/post');
 const indexRouter = require('./routers/index');
 const authRouter = require('./routers/auth');
-
 const { connectToMongo } = require('./db/connection');
 const logger = require('./services/logger');
+require('./util/passport');
 
 const port = process.env.NODE_LOCAL_PORT || 3000;
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
