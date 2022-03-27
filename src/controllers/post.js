@@ -201,6 +201,17 @@ module.exports = {
           { price: { $lte: max_price || Infinity } },
         ],
       };
+      // extract filter properties and add them to the query
+      const exists = ['type', 'min_price', 'max_price', 'price'];
+      Object.keys(req.query).forEach((key) => {
+        if (exists.includes(key)) {
+          delete req.query[key];
+        } else {
+          const cond = {};
+          cond[`description.${key}`] = req.query[key];
+          query.$and.push(cond);
+        }
+      });
       filterPosts(res, query);
     }
   },
