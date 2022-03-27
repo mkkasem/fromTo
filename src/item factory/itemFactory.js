@@ -1,22 +1,25 @@
-const Car = require('./items classes/Car');
-const Statment = require('./items classes/Statment');
+const vehicle = require('./catagories/vehicle/vehicleFactory');
+const realEstate = require('./catagories/real estate/realEstateFactory');
 
 // error messages
-const generalError = 'you did not specify a valid Item type';
+const generalError = 'invalid Item type';
 
 class ItemFactory {
-  createItem(type, obj) {
+  createItem(typeSequence, obj) {
+    const type = typeSequence[0].toString();
+    const newTypeSequence = typeSequence.splice(1);
+    // eslint-disable-next-line no-useless-catch
     try {
       switch (type) {
-        case 'car':
-          return new Car(obj);
-        case 'statment':
-          return new Statment(obj);
+        case 'vehicle':
+          return vehicle(newTypeSequence, obj);
+        case 'real estate':
+          return realEstate(newTypeSequence, obj);
         default:
           break;
       }
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
     throw new Error(generalError);
   }

@@ -1,4 +1,4 @@
-class Statment {
+class House {
   adress;
 
   floor;
@@ -18,7 +18,7 @@ class Statment {
       !obj.space ||
       !obj.buildingAge
     )
-      throw new Error('statment description validation error');
+      throw new Error('House description validation error');
     this.adress = obj.adress;
     this.floor = obj.floor;
     this.room = obj.room;
@@ -27,4 +27,4 @@ class Statment {
   }
 }
 
-module.exports = Statment;
+module.exports = House;

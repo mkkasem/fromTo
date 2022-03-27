@@ -1,5 +1,5 @@
+/* eslint-disable camelcase */
 const Post = require('../models/post');
-const User = require('../models/user');
 
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
@@ -137,28 +137,15 @@ module.exports = {
       return res.status(403).json(error);
     }
   },
-  // getAllPosts: async (req, res) => {
-  //   /* test if it's registered user then get all the posts
-  //     related to the interested tags of the user
-  //    */
-  //   const query = {};
-  //   if (req.user) {
-  //     // find user's intrests
-  //     const user = await User.findById(req.user._id);
-  //     // if user has no intrests then get all posts ordered by date
-  //     if (!user.tags.length) {
-  //       filterPosts(res, query);
-  //     } else {
-  //       const tags = user.tags.map((tag) => tag.title);
-  //       query['tags.title'] = { $in: tags };
-  //       filterPosts(res, query);
-  //     }
-  //   }
-  //   // if not registered user get all posts ordered by date (recent posts)
-  //   else {
-  //     filterPosts(res, query);
-  //   }
-  // },
+  getAllPosts: async (req, res) => {
+    try {
+      const posts = await Post.find().sort({ createdAt: -1 });
+      if (!posts) res.status(204).json({ message: `there are no posts` });
+      else res.status(200).json(posts);
+    } catch (err) {
+      res.status(403).json({ message: err.message });
+    }
+  },
 
   getOnePost: async (req, res) => {
     const { id } = req.params;
@@ -191,25 +178,41 @@ module.exports = {
     }
   },
 
-  getPostsWithSimilarTags: async (req, res) => {
-    const { tags } = req.query;
-    if (!tags) res.status(403).json({ message: 'Make sure you choose tags' });
+  getFilteredPosts: async (req, res) => {
+    const { type, max_price, min_price } = req.query;
+    if (!type)
+      res.status(403).json({ message: 'invalid type for item filter' });
+    // eslint-disable-next-line no-restricted-globals
+    else if (max_price && isNaN(max_price))
+      res
+        .status(403)
+        .json({ message: 'min and max price should be numbers only' });
+    // eslint-disable-next-line no-restricted-globals
+    else if (min_price && isNaN(min_price))
+      res
+        .status(403)
+        .json({ message: 'min and max price should be numbers only' });
     else {
-      const query = {};
-      // You can add new filter parameters filter by title, content, isSolved...
-      query['tags.title'] = tags.title;
+      const typeSecuence = type.split('-');
+      const query = {
+        $and: [
+          { type: { $in: typeSecuence } },
+          { price: { $gte: min_price || 0 } },
+          { price: { $lte: max_price || Infinity } },
+        ],
+      };
       filterPosts(res, query);
     }
   },
   searchForPosts: async (req, res) => {
-    // search in post's title and content
+    // search in post's title and types
     const { text } = req.query;
     if (!text)
       res.status(403).json({ message: 'Make sure you type search text' });
     else {
       const regEx = new RegExp(text, 'i'); // insensitive
       const query = {
-        $or: [{ title: { $regex: regEx } }, { content: { $regex: regEx } }],
+        $or: [{ title: { $regex: regEx } }, { type: { $regex: regEx } }],
       };
       filterPosts(res, query);
     }
