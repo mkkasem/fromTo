@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const isImageUrl = require('is-image-url');
 const User = require('../models/user');
 
 const buildPayload = (userData) => ({
@@ -42,8 +43,17 @@ const createToken = (user, rememberMe, res) => {
 };
 
 const verifySignUpData = async (data) => {
-  const { username, email, password, passwordConfirm } = data;
+  const { username, email, password, passwordConfirm, phone, avatar } = data;
 
+  if (!isImageUrl(avatar)) {
+    throw new Error('Avatar must be a valid image url');
+  }
+  if (!password || !passwordConfirm) {
+    throw new Error('Password and Confirm password is required');
+  }
+  if (!phone) {
+    throw new Error('Phone is required');
+  }
   if (await User.exists({ username })) {
     throw new Error('Username already used');
   }

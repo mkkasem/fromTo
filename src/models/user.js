@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-const isImageUrl = require('is-image-url');
-
-const validator = (url) => isImageUrl(url);
-const imageValidator = [validator, 'Please enter a valid image URL!'];
 
 const { Schema } = mongoose;
 
@@ -41,7 +37,6 @@ const userSchema = new Schema({
   },
   password_hash: {
     type: String,
-    required: [true, 'Password is required'],
   },
   isAdmin: {
     type: Boolean,
@@ -49,13 +44,11 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    validate: imageValidator,
     default:
       'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
   },
   phone: {
     type: String,
-    required: [true, 'Phone is required'],
   },
   posts: [{ type: Schema.Types.ObjectId, ref: process.env.POST_MODEL_NAME }],
   rates: [rates],
