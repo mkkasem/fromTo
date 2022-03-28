@@ -6,7 +6,7 @@ const postController = require('../controllers/post');
 
 const isAuthenticated = require('../middlewares/isAuth');
 
-// router.get('/', postController.getAllPosts);
+router.get('/', postController.getAllPosts);
 
 router.post('/', isAuthenticated, postController.addNewPost);
 
@@ -16,7 +16,7 @@ router.delete('/:id', isAuthenticated, postController.deletePost);
 
 router.get('/search', postController.searchForPosts);
 
-router.get('/filter/:tags', postController.getPostsWithSimilarTags);
+router.get('/filter', postController.getFilteredPosts);
 
 router.get('/:id', postController.getOnePost);
 

@@ -1,0 +1,6 @@
+{
+  "catagories": [
+    { "real estate": ["house", "land"] },
+    { "vehicle": ["car", "van"] }
+  ]
+}

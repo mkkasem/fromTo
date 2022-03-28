@@ -13,10 +13,14 @@ const buildPayload = (userData) => ({
     _id: userData._id.toString(),
   },
 });
-
+/*
+this function should be modified
+somethimg wrong with it 
+*/
+// eslint-disable-next-line consistent-return
 const confirmPassword = async (user, password) => {
   const validPassword = await bcrypt.compare(password, user.password_hash);
-  if (!validPassword) throw new Error('Wrong password');
+  if (!validPassword) return new Error('Wrong password');
 };
 
 const createToken = (user, rememberMe, res) => {
