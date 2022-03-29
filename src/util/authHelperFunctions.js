@@ -45,7 +45,7 @@ const createToken = (user, rememberMe, res) => {
 const verifySignUpData = async (data) => {
   const { username, email, password, passwordConfirm, phone, avatar } = data;
 
-  if (!isImageUrl(avatar)) {
+  if (avatar && !isImageUrl(avatar)) {
     throw new Error('Avatar must be a valid image url');
   }
   if (!password || !passwordConfirm) {
