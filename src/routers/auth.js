@@ -21,6 +21,17 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/', session: false }),
-  authController.googleCallBack
+  authController.thirdPartyCallBack
+);
+
+router.get(
+  '/facebook',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
+
+router.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/', session: false }),
+  authController.thirdPartyCallBack
 );
 module.exports = router;
