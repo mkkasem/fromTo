@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+
 const User = require('../models/user');
 const {
   confirmPassword,
@@ -14,13 +15,13 @@ const signIn = async (req, res) => {
     });
 
     if (!user) {
-      throw new Error('Wrong username or email');
+      throw new Error('Wrong username or password');
     }
     confirmPassword(user, password);
 
     createToken(user, rememberMe, res);
-
-    return res.json({ message: 'Successfully signed in' });
+    return res.redirect(`/?auth=true`);
+    //  return res.json({ message: 'Successfully signed in' });
   } catch (err) {
     return res.status(422).json({ message: err.message ?? err });
   }

@@ -141,7 +141,8 @@ module.exports = {
     try {
       const posts = await Post.find().sort({ createdAt: -1 });
       if (!posts) res.status(204).json({ message: `there are no posts` });
-      else res.status(200).json(posts);
+      res.json({ posts });
+      //  else res.status(200).render('home', { posts });
     } catch (err) {
       res.status(403).json({ message: err.message });
     }

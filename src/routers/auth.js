@@ -6,8 +6,11 @@ const router = express.Router();
 const authController = require('../controllers/auth');
 
 router.post('/signin', authController.signIn);
+
 router.post('/signup', authController.signUp);
 router.get('/signout', authController.signOut);
+
+router.get('/signin', (req, res) => res.render('signin'));
 
 router.get(
   '/google',
