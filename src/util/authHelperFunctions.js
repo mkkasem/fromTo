@@ -18,9 +18,12 @@ this function should be modified
 somethimg wrong with it 
 */
 // eslint-disable-next-line consistent-return
-const confirmPassword = async (user, password) => {
-  const validPassword = await bcrypt.compare(password, user.password_hash);
-  if (!validPassword) return new Error('Wrong password');
+const isCorrectPassword = async (user, password) => {
+  if (user) {
+    // eslint-disable-next-line no-return-await
+    return await bcrypt.compare(password, user.password_hash);
+  }
+  return false;
 };
 
 const createToken = (user, rememberMe, res) => {
@@ -38,7 +41,7 @@ const createToken = (user, rememberMe, res) => {
 
   res.cookie('token', token, {
     maxAge: cookieAge,
-    httpOnly: true,
+    httpOnly: false,
   });
 };
 
@@ -66,7 +69,7 @@ const verifySignUpData = async (data) => {
 };
 
 module.exports = {
-  confirmPassword,
+  isCorrectPassword,
   createToken,
   verifySignUpData,
 };
