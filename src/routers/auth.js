@@ -5,12 +5,15 @@ const router = express.Router();
 
 const authController = require('../controllers/auth');
 
-router.post('/signin', authController.signIn);
+router
+  .route('/signin')
+  .post(authController.signIn)
+  .get((req, res) => {
+    res.render('signin');
+  });
 
 router.post('/signup', authController.signUp);
 router.get('/signout', authController.signOut);
-
-router.get('/signin', (req, res) => res.render('signin'));
 
 router.get(
   '/google',
