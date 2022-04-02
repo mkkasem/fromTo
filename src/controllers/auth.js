@@ -18,6 +18,9 @@ const signIn = async (req, res) => {
       throw new Error('Wrong username or password');
     }
     createToken(user, rememberMe, res);
+    res.cookie('login', true);
+    res.cookie('user', user);
+    // res.cookie('posts', [{ title: 'Hello world', price: '20$' }]);
     return res.redirect('/');
     // return res.json({ message: 'Successfully signed in' });
   } catch (err) {
@@ -48,7 +51,7 @@ const signUp = async (req, res) => {
 const signOut = (req, res) => {
   try {
     res.clearCookie('token');
-    return res.json({ success: true });
+    return res.redirect('/');
   } catch (err) {
     return res.status(422).json({ message: err.message ?? err });
   }
