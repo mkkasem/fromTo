@@ -8,8 +8,8 @@
   "scripts": {
     "start": "nodemon src/app.js",
     "test": "set IS_JEST=1 && yarn validate && jest --passWithNoTests",
-    "lint": "eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json)\"",
+    "lint": "eslint --ignore-path .eslintignore .",
+    "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|json)\"",
     "validate": "yarn format && yarn lint",
     "validate-staged": "lint-staged",
     "postinstall": "husky install && husky add .husky/pre-commit \"yarn validate-staged\" && husky add .husky/pre-push \"yarn test\""
