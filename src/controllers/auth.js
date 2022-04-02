@@ -7,8 +7,11 @@ const {
 } = require('../util/authHelperFunctions');
 
 const signIn = async (req, res) => {
-  const { username, email, password, rememberMe } = req.body;
+  const { usernameOrEmail, password, rememberMe } = req.body;
   try {
+    const username = usernameOrEmail;
+    const email = usernameOrEmail;
+
     const user = await User.findOne({
       $or: [{ email }, { username }],
     });
@@ -18,8 +21,6 @@ const signIn = async (req, res) => {
       throw new Error('Wrong username or password');
     }
     createToken(user, rememberMe, res);
-    res.cookie('login', true);
-    res.cookie('user', user);
     // res.cookie('posts', [{ title: 'Hello world', price: '20$' }]);
     return res.redirect('/');
     // return res.json({ message: 'Successfully signed in' });

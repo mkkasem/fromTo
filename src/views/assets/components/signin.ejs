@@ -11,9 +11,10 @@
     />
 
     <!--====== Title ======-->
-    <title>Sign In and Sign Up | Ayro UI</title>
+    <title>Sign In</title>
 
     <!--====== Favicon Icon ======-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link
       rel="shortcut icon"
       href="/images/favicon.svg"
@@ -22,6 +23,7 @@
 
     <!--====== Bootstrap css ======-->
 <!-- CSS only -->
+
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
 <!--====== Line Icons css ======-->
     <link rel="stylesheet" href="/css/lineicons.css" />
@@ -30,18 +32,29 @@
     <link rel="stylesheet" href="/scss/starter.css" />
 
     <link rel="stylesheet" href="/scss/sign-in-up/sign-in-up-01.css" />
+
+    <style>
+      .divider:after,
+        .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+        }
+    </style>
   </head>
 
   <body>
     <!--====== SIGNIN ONE PART START ======-->
-    <% if(locals.error){ %>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong><%=error%> </strong> 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <%}%>
+   
     <section class="signin-area signin-one">
       <div class="container">
+        <% if(locals.error){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><%=error%> </strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <%}%>
         <div class="row justify-content-center">
           <div class="col-lg-5">
             <form action="/api/auth/signin" method="post">
@@ -49,9 +62,9 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-input">
-                      <label>Your account will be under this email</label>
+                      <label>Your account email or username</label>
                       <div class="input-items default">
-                        <input type="text" placeholder="Email" name = "email"  />
+                        <input type="text" placeholder="Email" name = "usernameOrEmail"  />
                         <i class="lni lni-envelope"></i>
                       </div>
                     </div>
@@ -70,29 +83,38 @@
                     </div>
                     <!-- form input -->
                   </div>
+                  <div class="col-md-12 mt-2">
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberMe">
+                      <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                    </div>
+                  </div>
+                    <!-- form input -->
                   <div class="col-md-6">
                     <div class="form-input rounded-buttons">
                       <button
                         class="btn primary-btn rounded-full"
                         type="submit"
                       >
-                        Sign In!
+                        Sign In
                       </button>
                     </div>
+                    
                     <!-- form input -->
                   </div>
                   <div class="col-md-6">
                     <div class="form-input rounded-buttons">
-                      <button
+                      <a
+                        href="/api/auth/signup"
                         class="btn primary-btn-outline rounded-full"
-                        type="submit"
+                        
                       >
                         Sign Up
-                      </button>
+                    </a>
                     </div>
                     <!-- form input -->
                   </div>
-                  <div class="col-md-12">
+                    <div class="col-md-12">
                     <div class="form-input text-center">
                       <p class="text">
                         By signing in you agree with the
@@ -103,6 +125,17 @@
                     </div>
                     <!-- form input -->
                   </div>
+                  <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                  </div>   
+                 <!-- form input -->
+                 <a href="/api/auth/google" class="btn btn-lg btn-block btn-danger mb-2" style="background-color: #dc4e41;"
+                 ><i class="fab fa-google-plus-g me-2"></i>Sign in with google</a>
+                 <a href="/api/auth/facebook" class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
+                  ><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</a>
+                  
+                  <!-- form input -->
+                
                 </div>
               </div>
               <!-- signin form -->

@@ -1,17 +1,30 @@
 const express = require('express');
+require('dotenv').config();
+
+const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
+const logger = require('../services/logger');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const posts = await Post.find({});
+  try {
+    const { token } = req.cookies;
+    let user;
+    if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
 
-  const login = req.cookies.login || false;
-  const user = req.cookies.user || {};
-  // res.clearCookie('posts');
-  res.clearCookie('login');
-  res.clearCookie('user');
-  res.render('home', { posts, login, user });
+    // check if user is logged in from cookie
+    const loggedIn = !!user || false;
+    // draw posts when user is logged in
+    const posts = loggedIn ? await Post.find({}) : [];
+
+    // TOFIX: only user necessary attributes should be sent , not all
+    user = user || {};
+
+    res.render('home', { posts, loggedIn, user });
+  } catch (error) {
+    logger.error(error);
+  }
 });
 
 module.exports = router;
