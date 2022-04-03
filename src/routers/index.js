@@ -16,12 +16,14 @@ router.get('/', async (req, res) => {
     // check if user is logged in from cookie
     const loggedIn = !!user || false;
     // draw posts when user is logged in
-    const posts = loggedIn ? await Post.find({}) : [];
+    const posts = loggedIn
+      ? await Post.find({}).populate('owner').populate('comments.creator')
+      : [];
 
     // TOFIX: only user necessary attributes should be sent , not all
     user = user || {};
 
-    res.render('home', { posts, loggedIn, user });
+    res.render('post', { post: posts[0] }); // { posts, loggedIn, user });
   } catch (error) {
     logger.error(error);
   }
