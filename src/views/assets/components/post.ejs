@@ -390,17 +390,19 @@ a{
                                     <div class="col-md-10">
                                         <div class="username mt-2"><strong><%=post.comments[i].creator.fullName%></strong></div>
                                         <div class=" d-flex ">
-                                            <p id="commentText" class="text-muted mb-0"><%=post.comments[i].text%></p>
+                                            <p id="commentText<%=i%>" class="text-muted mb-0 col-md-5"><%=post.comments[i].text%></p>
                                             <%if(user._id == post.comments[i].creator._id.toString()){%>
-                                            <div class="d-flex">
-                                                <form class = "right" action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=PUT" method="post">
-                                                        <input type= "text" id= "commentTextUpdate" class="form-control ml-1 shadow-none textarea" style="display: none;" name= "text" value="<%=post.comments[i].text%>" >
-                                                        <button id = "apply" type="submit" class="btn btn-info btn-sm shadow-none" style="display: none;">apply</button>
-                                                        <button id = "edit" type="button" class = "btn btn-info btn-sm shadow-none" onclick="editForm()">edit</button>
-                                                </form>
-                                                <form class="col-md-6 " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=DELETE" method="post">
-                                                    <button type="submit" class="btn btn-danger btn-sm shadow-none">delete</button>
-                                                </form>
+                                            <div class="editedForm<%=i%> col-md-7 pr-0">
+                                                <div class="d-flex justify-content-end w-100">
+                                                    <form class = "d-flex " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=PUT" method="post">
+                                                            <input class="mr-5 form-control ml-1 shadow-none textarea" type= "text" id= "commentTextUpdate<%=i%>" name= "text" value="<%=post.comments[i].text%>" hidden="true">
+                                                            <button class="btn ml-5 mx-1  btn-info btn-sm shadow-none" id = "apply<%=i%>" type="submit"  style="display: none;">apply</button>
+                                                            <button class = "btn mx-1 btn-info btn-sm shadow-none" id = "edit<%=i%>" type="button"  onclick="editForm(<%=i%>)">edit</button>
+                                                    </form>
+                                                    <form class="d-flex " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=DELETE" method="post">
+                                                        <button type="submit" class="btn btn-danger btn-sm shadow-none">delete</button>
+                                                    </form>
+                                            </div>
                                             </div>
                                             <%}%>
                                         </div>
@@ -414,7 +416,7 @@ a{
             </div>
             <div class="col-md-7">
                 <div class="card">
-                    <div class="container d-flex">
+                    <div class="container d-md-flex">
                         <div class="about col-md-7 "> <h1 class="font-weight-bold"><%=post.title%></h1>
                             <h4 class="font-weight-bold text-success">$ <%=post.price%></h4>
                             <%post.type.forEach((type)=>{%>
@@ -424,18 +426,18 @@ a{
                             <%})%>
                             
                         </div>
-                        <div class="row d-flex text-center col-md-5">
+                        <div class="row d-md-flex text-center col-md-5">
                                 <div class="contact-box">
                                     <a class = "mb-2" ref="#profile.html">
-                                        <div class="d-flex justify-content-center mb-2 ">
+                                        <div class="d-md-flex justify-content-center mb-2 ">
                                             <img class= "rounded-circle" src="<%=post.owner.avatar%>" style="max-width: 100px !important; max-height: 100px !important;">
                                         </div>
-                                        <h5 class="d-flex justify-content-center"><strong><%=post.owner.fullName%></strong></h5>                                    
+                                        <h5 class="d-md-flex justify-content-center"><strong><%=post.owner.fullName%></strong></h5>                                    
                                     </a>
                                     <div class="contact-box-footer">
-                                        <div class="m-t-xs btn-group d-block">
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> <%= post.owner.phone%> </a>
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> <%=post.owner.email%></a>
+                                        <div class="m-t-xs btn-group d-md-block">
+                                            <a class="btn btn-xs btn-white d-md-block d-sm-flex flex-warp"><i class="fa fa-phone"></i> <%= post.owner.phone%> </a>
+                                            <a class="btn btn-xs btn-white d-md-block d-sm-flex flex-warp"><i class="fa fa-envelope"></i> <%=post.owner.email%></a>
                                         </div>
                                     </div>
                             
@@ -476,11 +478,14 @@ a{
             slideMargin: 0,
             thumbItem: 9
         });
-        function editForm(){
-            $('#apply').show();
-            $('#commentTextUpdate').show();
-            $('#commentText').hide();
-            $('#edit').hide();
+        function editForm(i){
+            $(`#apply${i}`).show();
+            $(`#commentTextUpdate${i}`).attr('hidden', false);
+            $(`#commentText${i}`).hide();
+            $(`#edit${i}`).hide();
+            
+            $(`.editedForm${i}`).removeClass('col-md-7');
+            $(`.editedForm${i}`).addClass('col-md-12');
         }
     </script>
   </body>
