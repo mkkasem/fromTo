@@ -19,9 +19,14 @@
       href="/images/favicon.svg"
       type="image/svg"
     />
+    <!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="/css/lineicons.css" />
 
-    <!--====== Bootstrap css ======-->
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="/scss/footers/footer-01.css" />
+    <!--add style if exists-->
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/scss/alerts/alerts.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -359,22 +364,46 @@ a{
                 <div class="card">
                     <div class="demo">
                         <ul id="lightSlider">
-                            
-                                <li data-thumb="<%= post.image %>">
-                                    <img class = "" src="<%= post.image %>"/>
-                                </li>
+                            <li data-thumb="<%= post.image %>">
+                                <img class = "" src="<%= post.image %>"/>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="card mt-2">
                     <h6>Reviews</h6>
+                    <div class="bg-light p-2">
+                        <form action="/api/posts/<%=post._id%>/comments" method="post">
+                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="<%= user.avatar%>" style="max-width: 50px !important; max-height: 50px !important;">
+                                <textarea  class="form-control ml-1 shadow-none textarea" name= "text"></textarea>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <button type="submit" class="btn btn-primary btn-sm shadow-none">comment</button>
+                            </div>
+                        </form>
+                    </div>
                     <div class="comment-section">
                         <% for(var i=0; i<post.comments.length; i++){ %>                             
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row align-items-center"> <img src="<%=post.comments[i].creator.avatar%>" class="rounded-circle profile-image">
-                                    <div class="d-flex flex-column ml-1 comment-profile">
-                                        <div class="comment-ratings"> </div> <span class="username"><%=post.comments[i].creator.fullName%></span>
-                                        <div><p class="small mb-0"><%=post.comments[i].text%></p></div>
+                            <div class="container-fluid">
+                                <div class=" row"> 
+                                    <img src="<%=post.comments[i].creator.avatar%>" class="rounded-circle profile-image col-md-2 p-0">
+                                    <div class="col-md-10">
+                                        <div class="username mt-2"><strong><%=post.comments[i].creator.fullName%></strong></div>
+                                        <div class=" d-flex ">
+                                            <p id="commentText" class="text-muted mb-0"><%=post.comments[i].text%></p>
+                                            <%if(user._id == post.comments[i].creator._id.toString()){%>
+                                            <div class="d-flex">
+                                                <form class = "right" action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=PUT" method="post">
+                                                        <input type= "text" id= "commentTextUpdate" class="form-control ml-1 shadow-none textarea" style="display: none;" name= "text" value="<%=post.comments[i].text%>" >
+                                                        <button id = "apply" type="submit" class="btn btn-info btn-sm shadow-none" style="display: none;">apply</button>
+                                                        <button id = "edit" type="button" class = "btn btn-info btn-sm shadow-none" onclick="editForm()">edit</button>
+                                                </form>
+                                                <form class="col-md-6 " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=DELETE" method="post">
+                                                    <button type="submit" class="btn btn-danger btn-sm shadow-none">delete</button>
+                                                </form>
+                                            </div>
+                                            <%}%>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -388,6 +417,12 @@ a{
                     <div class="container d-flex">
                         <div class="about col-md-7 "> <h1 class="font-weight-bold"><%=post.title%></h1>
                             <h4 class="font-weight-bold text-success">$ <%=post.price%></h4>
+                            <%post.type.forEach((type)=>{%>
+                                <label class="label primary-label rounded-full">
+                                    <%=type%>
+                                </label>         
+                            <%})%>
+                            
                         </div>
                         <div class="row d-flex text-center col-md-5">
                                 <div class="contact-box">
@@ -424,11 +459,16 @@ a{
             </div>
         </div>
     </div>
-    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+    
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
     <script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
     <script>
+        document.onload = function(){
+            $("#apply").hide();
+            $("#commentTextUpdate").hide();
+        }
         $('#lightSlider').lightSlider({
             gallery: true,
             item: 1,
@@ -436,6 +476,12 @@ a{
             slideMargin: 0,
             thumbItem: 9
         });
+        function editForm(){
+            $('#apply').show();
+            $('#commentTextUpdate').show();
+            $('#commentText').hide();
+            $('#edit').hide();
+        }
     </script>
   </body>
 </html>

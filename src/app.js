@@ -8,6 +8,7 @@ const passport = require('passport');
 const path = require('path');
 
 const bodyPareser = require('body-parser');
+const methodOverride = require('method-override');
 const userRouter = require('./routers/user');
 const postRouter = require('./routers/post');
 const indexRouter = require('./routers/index');
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'views/js')));
 // app.use(express.static(`${__dirname}/views/Bizland`));
 // app.use(express.static(path.join(__dirname, 'js')));
 
+app.use(methodOverride('_method'));
 app.use(bodyPareser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views/components`);

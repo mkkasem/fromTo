@@ -20,7 +20,7 @@ const postSchema = new Schema(
     title: {
       type: String,
       maxLength: [
-        30,
+        120,
         'Item name should have max length of 30 characters only.',
       ],
       required: [true, 'Item title is required'],

@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     // TOFIX: only user necessary attributes should be sent , not all
     user = user || {};
 
-    res.render('post', { post: posts[0] }); // { posts, loggedIn, user });
+    res.render('home', { posts, loggedIn, user });
   } catch (error) {
     logger.error(error);
   }

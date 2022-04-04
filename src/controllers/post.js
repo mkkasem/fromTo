@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
 
 //  errors messages
@@ -98,8 +99,8 @@ module.exports = {
         creator: req?.user?._id ?? null,
       };
       post.comments.push(newComment);
-      const updatedPost = await post.save();
-      return res.status(201).json(updatedPost);
+      await post.save();
+      return res.redirect(303, `/api/posts/${id}`);
     } catch (error) {
       return res.status(403).json(randomError);
     }
@@ -113,8 +114,8 @@ module.exports = {
       //  check authority for the user
       if (id && req.user._id === comment.creator.toString()) {
         comment.text = text;
-        const updatedPost = await post.save();
-        return res.status(201).json(updatedPost);
+        await post.save();
+        return res.redirect(303, `/api/posts/${id}`);
       }
       throw authorizationError;
     } catch (error) {
@@ -129,8 +130,8 @@ module.exports = {
       if (id && req.user._id === comment.creator.toString()) {
         const indexOfComment = post.comments.indexOf(comment);
         post.comments.splice(indexOfComment, 1);
-        const updatedPost = await post.save();
-        return res.status(200).json(updatedPost);
+        await post.save();
+        return res.redirect(303, `/api/posts/${id}`);
       }
       throw authorizationError;
     } catch (error) {
@@ -151,12 +152,20 @@ module.exports = {
   getOnePost: async (req, res) => {
     const { id } = req.params;
     try {
-      const post = await Post.findById(id);
+      const { token } = req.cookies;
+      let user;
+      if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
+
+      // check if user is logged in from cookie
+      const post = await Post.findById(id)
+        .populate('owner')
+        .populate('comments.creator');
       if (!post)
         res
           .status(204)
           .json({ message: `The post you are looking for not found` });
-      else res.status(200).json(post);
+      // todo: do thsis route
+      else res.render('post', { post, user });
     } catch (err) {
       res.status(403).json({ message: err.message });
     }
