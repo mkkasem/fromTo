@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <!--add style if exists-->
+    
     <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
     <style>
         body{margin-top:20px;
@@ -359,6 +360,7 @@ a{
 
   <body>
     <%- include("navbar");-%> 
+    
     <div class="container-fluid mt-2 mb-3">
         <div class="row no-gutters">
             <div class="col-md-5 pr-2">
@@ -397,11 +399,11 @@ a{
                                                 <div class="d-flex justify-content-end w-100">
                                                     <form class = "d-flex " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=PUT" method="post">
                                                             <input class="mr-5 form-control ml-1 shadow-none textarea" type= "text" id= "commentTextUpdate<%=i%>" name= "text" value="<%=post.comments[i].text%>" hidden="true">
-                                                            <button class="btn ml-5 mx-1  btn-info btn-sm shadow-none" id = "apply<%=i%>" type="submit"  style="display: none;">apply</button>
-                                                            <button class = "btn mx-1 btn-info btn-sm shadow-none" id = "edit<%=i%>" type="button"  onclick="editForm(<%=i%>)">edit</button>
+                                                            <button class=" ml-5 mx-1 text-white btn-info btn-sm shadow-none" id = "apply<%=i%>" type="submit"  style="display: none;">apply</button>
+                                                            <button class = "mx-1 btn-info btn-sm text-white shadow-none" id = "edit<%=i%>" type="button"  onclick="editForm(<%=i%>)">edit</button>
                                                     </form>
                                                     <form class="d-flex " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=DELETE" method="post">
-                                                        <button type="submit" class="btn btn-danger btn-sm shadow-none">delete</button>
+                                                        <button type="submit" class="btn-danger btn-sm shadow-none">delete</button>
                                                     </form>
                                             </div>
                                             </div>
