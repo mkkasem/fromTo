@@ -102,7 +102,7 @@ module.exports = {
       await post.save();
       return res.redirect(303, `/api/posts/${id}`);
     } catch (error) {
-      return res.status(403).json(randomError);
+      return res.status(403).json(error.message);
     }
   },
   updateComment: async (req, res) => {
@@ -155,6 +155,7 @@ module.exports = {
       const { token } = req.cookies;
       let user;
       if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
+      const loggedIn = !!user || false;
 
       // check if user is logged in from cookie
       const post = await Post.findById(id)
@@ -165,7 +166,7 @@ module.exports = {
           .status(204)
           .json({ message: `The post you are looking for not found` });
       // todo: do thsis route
-      else res.render('post', { post, user });
+      else res.render('post', { post, loggedIn, user });
     } catch (err) {
       res.status(403).json({ message: err.message });
     }

@@ -22,7 +22,7 @@
 
     <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
-
+    
     <!--====== Lineicons CSS ======-->
     <link rel="stylesheet" href="/css/lineicons.css" />
 
@@ -34,10 +34,8 @@
     <%- include("navbar");-%> 
 
     <%- include("header");-%> 
-    <%- include("postMenu");-%>
-    <div id= "main" class="container">
+    <%- include("postMenu",posts);-%>
       <%- include('card', posts); %>
-    </div>
     <%- include("footer"); -%>
     <script src="/js/ejs.min.js"></script>
   </body>

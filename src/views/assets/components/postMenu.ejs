@@ -468,79 +468,36 @@ h6 {
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <div class="card-body">
-                        <h5><b>Multi Grain Bread</b> </h5>
-                        <div class="d-flex flex-row my-2">
-                            <div class="text-muted">₹110/loaf</div>
-                            <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 loaf</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div>
-                        </div> <button class="btn w-100 rounded my-2">Add to cart</button>
+            <%if(locals.posts){ posts.forEach((post)=>{%>
+            <a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-3" href="api/posts/<%=post.id%>">
+                <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( <%=post.id.toString()%>" > -->
+                    <div class="card" style="cursor: pointer;" > <img class="card-img-top" src="<%=post.image%>">
+                        <div class="card-body">
+                            <h5><b>Multi Grain Bread</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="text-muted text-success">
+                                    <strong class="text-success"><%=post.price%> $</strong>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/3085146/pexels-photo-3085146.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <div class="card-body">
-                        <h5><b>Bagels</b> </h5>
-                        <div class="d-flex flex-row my-2">
-                            <div class="text-muted">₹35/piece</div>
-                            <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 pc</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div>
-                        </div> <button class="btn w-100 rounded my-2">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/1448665/pexels-photo-1448665.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <div class="card-body">
-                        <h5><b>White Bread</b> </h5>
-                        <div class="d-flex flex-row my-2">
-                            <div class="text-muted">₹80/loaf</div>
-                            <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 loaf</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div>
-                        </div> <button class="btn w-100 rounded my-2">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/461060/pexels-photo-461060.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <div class="card-body">
-                        <h5><b>Baguette</b> </h5>
-                        <div class="d-flex flex-row my-2">
-                            <div class="text-muted">₹160/piece</div>
-                            <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 pc</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div>
-                        </div> <button class="btn w-100 rounded my-2">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card"> <img class="card-img-top" src="https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <div class="card-body">
-                        <h5><b>Masala Bun</b> </h5>
-                        <div class="d-flex flex-row my-2">
-                            <div class="text-muted">₹85/piece</div>
-                            <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span class="px-sm-1">1 pc</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div>
-                        </div> <button class="btn w-100 rounded my-2">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                <div class="card d-relative"> <img class="card-img-top" src="https://images.pexels.com/photos/3570/morning-breakfast-croissant.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <div class="card-body">
-                        <h5><b>Croissant</b> </h5>
-                        <div class="rounded bg-white discount" id="orange">10% off</div>
-                        <div class="d-flex flex-row my-2">
-                            <div class="text-muted price"><del>₹55</del>₹45/piece</div>
-                            <div class="ml-auto"> <button class="border rounded bg-white sign"><span class="fa fa-plus" id="orange"></span></button> <span>1pc</span> <button class="border rounded bg-white sign"><span class="fa fa-minus" id="orange"></span></button> </div>
-                        </div> <button class="btn w-100 rounded my-2">Add to cart</button>
-                    </div>
-                </div>
-            </div>
+                <!-- </div> -->
+            </a>
+            <%})}%>
         </div>
     </div>
 </section>
 <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
-    <script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+
+
+<script>
+    function getPost(id) {
+        console.log(id);
+        // window.location.href = '/post/' + id;
+    }
+</script>
   </body>
 </html>

@@ -358,6 +358,7 @@ a{
   </head>
 
   <body>
+    <%- include("navbar");-%> 
     <div class="container-fluid mt-2 mb-3">
         <div class="row no-gutters">
             <div class="col-md-5 pr-2">
@@ -418,7 +419,7 @@ a{
                 <div class="card">
                     <div class="container d-md-flex">
                         <div class="about col-md-7 "> <h1 class="font-weight-bold"><%=post.title%></h1>
-                            <h4 class="font-weight-bold text-success">$ <%=post.price%></h4>
+                            <h4 class="font-weight-bold text-success"><%=post.price%> $</h4>
                             <%post.type.forEach((type)=>{%>
                                 <label class="label primary-label rounded-full">
                                     <%=type%>
@@ -436,7 +437,9 @@ a{
                                     </a>
                                     <div class="contact-box-footer">
                                         <div class="m-t-xs btn-group d-md-block">
+                                            <%if(post.owner.phone){%>
                                             <a class="btn btn-xs btn-white d-md-block d-sm-flex flex-warp"><i class="fa fa-phone"></i> <%= post.owner.phone%> </a>
+                                            <%}%>
                                             <a class="btn btn-xs btn-white d-md-block d-sm-flex flex-warp"><i class="fa fa-envelope"></i> <%=post.owner.email%></a>
                                         </div>
                                     </div>

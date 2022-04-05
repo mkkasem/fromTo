@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-const isImageUrl = require('is-image-url');
-
-const validator = (url) => isImageUrl(url);
-const imageValidator = [validator, 'Please enter a valid image URL!'];
 
 const { Schema } = mongoose;
 
@@ -42,7 +38,6 @@ const postSchema = new Schema(
     image: {
       type: String,
       required: [true, 'Item photo is required'],
-      validate: imageValidator,
     },
     price: {
       type: Number,

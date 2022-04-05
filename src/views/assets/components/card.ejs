@@ -79,21 +79,21 @@
 
   <body>
     <!--====== CARD PART START ======-->
-    <section class="card-area pb-5">
+    <section class="card-area pb-5" >
       <div class="container">
         <div class="row justify-content-center">
           <% if(posts)%> <% posts.forEach(function(post){ %>
           <div class="col-lg-4 col-md-7 col-sm-9">
-            <div class="single-card card-style-one">
-              <div class="card-image">
+            <div class="single-card card-style-one ">
+              <!-- <div class="card-image">
                 <img src=" <%= post.image %>" alt="Image" />
-              </div>
-              <div class="card-content">
+              </div> -->
+              <!-- <div class="card-content">
                 <h4 class="card-title">
                   <a href="javascript:void(0)"><%= post.title%></a>
                 </h4>
                 <p class="text"><%= post.price%></p>
-              </div>
+              </div> -->
             </div>
           </div>
           <% }); %>

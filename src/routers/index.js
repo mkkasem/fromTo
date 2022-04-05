@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
     const posts = loggedIn
       ? await Post.find({}).populate('owner').populate('comments.creator')
       : [];
-
     // TOFIX: only user necessary attributes should be sent , not all
     user = user || {};
 
