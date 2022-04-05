@@ -46,31 +46,7 @@ const createToken = (user, rememberMe, res) => {
   });
 };
 
-const verifySignUpData = async (data) => {
-  const { username, email, password, passwordConfirm, phone, avatar } = data;
-
-  if (avatar && !isImageUrl(avatar)) {
-    throw new Error('Avatar must be a valid image url');
-  }
-  if (!password || !passwordConfirm) {
-    throw new Error('Password and Confirm password is required');
-  }
-  if (!phone) {
-    throw new Error('Phone is required');
-  }
-  if (await User.exists({ username })) {
-    throw new Error('Username already used');
-  }
-  if (await User.exists({ email })) {
-    throw new Error('Email already used');
-  }
-  if (password !== passwordConfirm) {
-    throw new Error('Passwords do not match');
-  }
-};
-
 module.exports = {
   isCorrectPassword,
   createToken,
-  verifySignUpData,
 };

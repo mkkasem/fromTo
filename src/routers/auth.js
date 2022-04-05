@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const { userValidationRules, validate } = require('../middlewares/validator');
 
 const router = express.Router();
 
@@ -23,9 +24,11 @@ router
 
 router
   .route('/signup')
-  .post(authController.signUp)
+  .post(userValidationRules(), validate, authController.signUp)
   .get(redirectToHomeIfAuthenticated, (req, res) => {
-    res.render('signup');
+    res.render('signup', {
+      errors: [],
+    });
   });
 
 router.get('/signout', authController.signOut);

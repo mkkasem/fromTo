@@ -3,7 +3,6 @@ const User = require('../models/user');
 const {
   isCorrectPassword,
   createToken,
-  verifySignUpData,
 } = require('../util/authHelperFunctions');
 
 const signIn = async (req, res) => {
@@ -36,16 +35,15 @@ const signUp = async (req, res) => {
     const { body } = req;
     const saltRounds = 10;
 
-    await verifySignUpData(body);
-
     const passwordHash = await bcrypt.hash(body.password, saltRounds);
     req.body.password_hash = passwordHash;
-
     const newUser = await User.create(req.body);
 
     return res.json(newUser);
   } catch (err) {
-    return res.status(422).json({ message: err.message ?? err });
+    return res.render('signup', {
+      errors: [err.message],
+    });
   }
 };
 
