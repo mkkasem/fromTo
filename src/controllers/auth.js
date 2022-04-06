@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 const User = require('../models/user');
+
 const {
   isCorrectPassword,
   createToken,
@@ -32,6 +34,17 @@ const signIn = async (req, res) => {
 
 const signUp = async (req, res) => {
   try {
+    // TODO: need some changes
+    const { avatar } = req.files;
+    await avatar.mv(`${__dirname}/../images/${req.body.username}`);
+
+    const image = fs.readFileSync(
+      `${__dirname}/../images/${req.body.username}`,
+      'base64'
+    );
+    const urlImage = `data:image/jpeg;base64,${image.toString('base64')}`;
+    req.body.avatar = urlImage;
+
     const { body } = req;
     const saltRounds = 10;
 

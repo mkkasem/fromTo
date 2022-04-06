@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const isImageUrl = require('is-image-url');
-const User = require('../models/user');
 
 const buildPayload = (userData) => ({
   user: {
@@ -11,7 +9,7 @@ const buildPayload = (userData) => ({
     lastName: userData.lastName,
     isAdmin: userData.isAdmin,
     _id: userData._id.toString(),
-    avatar: userData.avatar,
+    // avatar: userData.avatar,
   },
 });
 /*

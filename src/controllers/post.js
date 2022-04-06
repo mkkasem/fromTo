@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
-
+const User = require('../models/user');
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
-const randomError = { message: 'something went wrong' };
+// const randomError = { message: 'something went wrong' };
 const ItemFactory = require('../item factory/itemFactory');
 
 const itemFactory = new ItemFactory();
@@ -165,10 +165,13 @@ module.exports = {
         res
           .status(204)
           .json({ message: `The post you are looking for not found` });
+
       // todo: do thsis route
-      else res.render('post', { post, loggedIn, user });
+      const temp = await User.findById(user._id);
+      user.avatar = temp.avatar;
+      return res.render('post', { post, loggedIn, user });
     } catch (err) {
-      res.status(403).json({ message: err.message });
+      return res.status(403).json({ message: err.message });
     }
   },
   addNewPost: async (req, res) => {
