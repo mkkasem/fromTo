@@ -365,10 +365,13 @@ a{
         <div class="row no-gutters">
             <div class="col-md-5 pr-2">
                 <div class="card">
-                    <div class="demo">
-                        <ul id="lightSlider">
+                    <div class="demo" >
+                        <ul id="lightSlider" >
                             <li data-thumb="<%= post.image %>">
-                                <img class = "" src="<%= post.image %>"/>
+                                <img src="<%= post.image %>" />
+                            </li>
+                            <li data-thumb="<%= post.image %>">
+                                <img src="<%= post.image %>"/>
                             </li>
                         </ul>
                     </div>
@@ -377,7 +380,7 @@ a{
                     <h6>Reviews</h6>
                     <div class="bg-light p-2">
                         <form action="/api/posts/<%=post._id%>/comments" method="post">
-                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="<%= user.avatar%>" style="max-width: 50px !important; max-height: 50px !important;">
+                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="<%= user.avatar%>" style="max-width: 75px !important; max-height: 75px !important;">
                                 <textarea  class="form-control ml-1 shadow-none textarea" name= "text"></textarea>
                             </div>
                             <div class="mt-2 text-right">
@@ -387,9 +390,9 @@ a{
                     </div>
                     <div class="comment-section">
                         <% for(var i=0; i<post.comments.length; i++){ %>                             
-                            <div class="container-fluid">
-                                <div class=" row"> 
-                                    <img src="<%=post.comments[i].creator.avatar%>" class="rounded-circle profile-image col-md-2 p-0" style="max-width:100px;max-height:100px">
+                            <div class="container-fluid px-0">
+                                <div class=" row "> 
+                                    <img src="<%=post.comments[i].creator.avatar%>" class="rounded-circle profile-image col-md-2 p-0" style="max-width:50px;max-height:50px">
                                     <div class="col-md-10">
                                         <div class="username mt-2"><strong><%=post.comments[i].creator.fullName%></strong></div>
                                         <div class=" d-flex ">
