@@ -1,7 +1,7 @@
+/* eslint-disable no-shadow */
 /* eslint-disable camelcase */
 const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
-const User = require('../models/user');
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
 // const randomError = { message: 'something went wrong' };
@@ -166,9 +166,6 @@ module.exports = {
           .status(204)
           .json({ message: `The post you are looking for not found` });
 
-      // todo: do thsis route
-      const temp = await User.findById(user._id);
-      user.avatar = temp.avatar;
       return res.render('post', { post, loggedIn, user });
     } catch (err) {
       return res.status(403).json({ message: err.message });

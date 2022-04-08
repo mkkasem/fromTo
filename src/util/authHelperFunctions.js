@@ -9,7 +9,8 @@ const buildPayload = (userData) => ({
     lastName: userData.lastName,
     isAdmin: userData.isAdmin,
     _id: userData._id.toString(),
-    // avatar: userData.avatar,
+    phone: userData?.phone,
+    avatar: userData.avatar,
   },
 });
 /*

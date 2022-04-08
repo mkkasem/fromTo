@@ -39,6 +39,7 @@ app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views/components`);
 app.set('views', `${__dirname}/views/assets/components`);
 app.use(express.static(`${__dirname}/views/assets`));
+app.use(express.static(`${__dirname}/images`));
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
