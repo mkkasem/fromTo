@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const fs = require('fs');
 const User = require('../models/user');
 
 const {

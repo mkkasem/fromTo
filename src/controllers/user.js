@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const { createToken } = require('../util/authHelperFunctions');
 
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
@@ -51,9 +52,9 @@ module.exports = {
           { isTutor: true },
         ],
       });
-      res.status(200).json(users);
+      return res.status(200).json(users);
     } catch (e) {
-      res.status(400).json({ message: e.message });
+      return res.status(400).json({ message: e.message });
     }
   },
   editProfile: async (req, res) => {
@@ -85,11 +86,11 @@ module.exports = {
           delete req.body[key];
         }
       });
-      await User.findByIdAndUpdate(id, req.body, {
+      const updatedUser = await User.findByIdAndUpdate(id, req.body, {
         returnDocument: 'after',
       });
-
-      return res.status(200).json({ message: 'Updated successfully' });
+      createToken(updatedUser, false, res);
+      return res.redirect(`/api/users/profile`);
     } catch (e) {
       return res.status(422).json({ message: e.message });
     }
