@@ -361,7 +361,7 @@ a{
   <body>
     <%- include("navbar");-%> 
     
-    <div class="container-fluid mt-2 mb-3">
+    <div class="container mt-2 mb-3">
         <div class="row no-gutters">
             <div class="col-md-5 pr-2">
                 <div class="card">
@@ -392,7 +392,7 @@ a{
                     <%}%>
                     <div class="comment-section">
                         <% for(var i=0; i<post.comments.length; i++){ %>                             
-                            <div class="container-fluid px-0">
+                            <div class="container-fluid">
                                 <div class=" row "> 
                                     <img src="<%=post.comments[i].creator.avatar%>" class="rounded-circle profile-image col-md-2 p-0" style="max-width:50px;max-height:50px">
                                     <div class="col-md-10">
