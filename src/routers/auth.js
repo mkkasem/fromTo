@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 const { userValidationRules, validate } = require('../middlewares/validator');
 
 const router = express.Router();
@@ -32,6 +33,16 @@ router
   });
 
 router.get('/signout', authController.signOut);
+
+router
+  .route('/forget-password')
+  .get((req, res) => res.render('forgetPassword', { error: [] }))
+  .post(authController.forgetPassword);
+
+router
+  .route('/reset-password/:id/:token')
+  .get(authController.getResetPassword)
+  .post(authController.postResetPassword);
 
 router.get(
   '/google',
