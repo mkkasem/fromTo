@@ -65,6 +65,11 @@ const signUp = async (req, res) => {
 const forgetPassword = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
+  if (user.username.endsWith('google' || 'facebook')) {
+    return res.render('forgetPassword', {
+      error: ['You can not reset password for this account'],
+    });
+  }
   if (!user) {
     return res.render('forgetPassword', {
       error: ['Email not found'],
@@ -89,7 +94,7 @@ const forgetPassword = async (req, res) => {
       <a href="${link}" target="_blank">Link</a>
      </strong>
      <br>
-    Note: This link will expire in 2 hours.`,
+    Note: This link will expire in 2 hours`,
   };
   await sendEmail(mailOptions);
   return res.send('Please check your email');
@@ -133,10 +138,20 @@ const postResetPassword = async (req, res) => {
     }
 
     jwt.verify(token, process.env.JWT_SECRET + user.password_hash);
-
+    const errors = [];
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (password !== confirmPassword) {
+      errors.push('Password and confirm password do not match');
+    }
+    if (!regex.test(password)) {
+      errors.push(
+        'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character'
+      );
+    }
+    if (errors.length > 0) {
       return res.render('resetPassword', {
-        error: ['Password and confirm password does not match'],
+        errors,
         id,
         token,
       });
@@ -147,7 +162,7 @@ const postResetPassword = async (req, res) => {
     return res.redirect('/');
   } catch (error) {
     return res.render('resetPassword', {
-      error: ['Invalid Link'],
+      errors: ['Invalid Link'],
     });
   }
 };
