@@ -6,6 +6,8 @@ const postController = require('../controllers/post');
 
 const isAuthenticated = require('../middlewares/isAuth');
 
+router.get('/addPost', postController.getAddPostPage);
+
 router.get('/', postController.getAllPosts);
 
 router.post('/', isAuthenticated, postController.addNewPost);
