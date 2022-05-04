@@ -71,10 +71,10 @@
     display: block;
     height: 4px;
     margin: 0 auto;
-    position: absolute;
-    right: 80px;
-    top: 33px;
-    width: 80%;
+    position: relative;
+    right: -60px;
+    top: -68px;
+    width: 85%;
     z-index: -1;
 }
 .process-model li.visited::after {
@@ -89,7 +89,7 @@
     text-align: center;
     float: none;
 }
-.nav-tabs.process-model > li.active > a, .nav-tabs.process-model > li.active > a:hover, .nav-tabs.process-model > li.active > a:focus, .process-model li a:hover, .process-model li a:focus {
+.nav-tabs.process-model ,.nav-tabs.process-model > li.active > a, .nav-tabs.process-model > li.active > a:hover, .nav-tabs.process-model > li.active > a:focus, .process-model li a:hover, .process-model li a:focus {
     border: none;
     background: transparent;
 
@@ -179,6 +179,18 @@
         text-align: center;
     }
 }
+.disabled{
+  display: none !important;
+}
+.fade{
+  display: none !important;
+}
+.show.fade {
+  display: block !important;
+}
+.not-editable{
+  pointer-events: none;
+}
     </style>
   </head>
 
@@ -191,20 +203,19 @@
               <!-- design process steps-->
               <!-- Nav tabs -->
               <ul class="nav nav-tabs process-model more-icon-preocess" role="tablist">
-                <li role="presentation" class="active"><a href="#select" aria-controls="select"  role="tab" ><i class="fa fa-search" aria-hidden="true"></i>
+                <li role="presentation" class="active circle"><i class="fa fa-search" aria-hidden="true"></i>
                     <p>Type</p>
-                    
                   </a></li>
-                <li role="presentation"><a href="#content" aria-controls="content" role="tab" ><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                <li role="presentation" class="circle"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
                     <p>Content</p>
                     </a></li>
-                <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" ><i class="fa fa-send-o" aria-hidden="true"></i>
+                <li role="presentation" class="circle"><i class="fa fa-send-o" aria-hidden="true"></i>
                     <p>Preview</p>
                   </a></li>
-                <li role="presentation"><a href="#approval" aria-controls="approval" role="tab"><i class="fa fa-qrcode" aria-hidden="true"></i>
+                <li role="presentation" class="circle"><i class="fa fa-qrcode" aria-hidden="true"></i>
                     <p>Approval</p>
                   </a></li>
-                <li role="presentation"><a href="#complete" aria-controls="complete" role="tab" ><i class="fa fa-clipboard" aria-hidden="true"></i>
+                <li role="presentation" class="circle"><i class="fa fa-clipboard" aria-hidden="true"></i>
                     <p>Complete</p>
                   </a></li>
               </ul>
@@ -219,23 +230,27 @@
                           <div class="single-tabs tabs-six">
                             <div class="row no-gutters">
                               <div class="col-sm-4">
-                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                  <a class="active" id="v-pills-six-one-tab" data-bs-toggle="pill" href="#v-pills-six-one" role="tab"
-                                    aria-controls="v-pills-six-one" aria-selected="true"><i class="lni lni-vector"></i> TAB 01</a>
+                                <div class="nav flex-column nav-pills" id="pills-div" role="tablist" aria-orientation="vertical">
+                                  <%if(locals.tree){ %>
+                                    <%Object.keys(locals.tree).forEach(key =>{%>
+                                     <a class="tab-title active" id="pill-0" data-bs-toggle="pill" href="#pill-content-0" role="tab" 
+                                      aria-controls="pills-content-0" aria-selected="true"><i class="lni lni-vector"></i><%=key%></a>
+                                      <%})%>
+                                    <%}%>
                                 </div>
                               </div>
                               <div class="col-sm-8">
-                                <div class="tab-content" id="v-pills-tabContent">
-                                  <div class="tab-pane fade show active" id="v-pills-six-one" role="tabpanel"
-                                    aria-labelledby="v-pills-six-one-tab">
+                                <div class="tab-content" id="pills-content-div">
+                                  <div class="tab-pane-internal fade show active" id="pill-content-0" role="tabpanel"
+                                    aria-labelledby="pill-0">
                                     <div class="tab-text">
-                                        <ul class="list-group">
-                                            <li class="list-group-item active" aria-current="true">An active item</li>
-                                            <li class="list-group-item">A second item</li>
-                                            <li class="list-group-item">A third item</li>
-                                            <li class="list-group-item">A fourth item</li>
-                                            <li class="list-group-item">And a fifth one</li>
-                                          </ul>
+                                        <ul class="list-group" id="list-0">
+                                          <%if(locals.tree.catagories){ %>
+                                            <%Object.keys(locals.tree.catagories).forEach(key =>{%>
+                                            <li class="list-group-item btn btn-primary" id="<%=key%>" aria-current="true" data-location="<%=key%>" onclick="updateSelectTabView('<%=key%>','<%= JSON.stringify(locals.tree.catagories)%>',this)"><%=key%></li>
+                                            <%})%>
+                                          <%}%>
+                                        </ul>
                                     </div>
                                   </div>
                                 </div>
@@ -243,20 +258,17 @@
                             </div>
                             <!-- row -->
                           </div>
-                          <div class="text-end p-3">
-                            <a href="javascript:void(0)" class="btn primary-btn-outline">
-                                back
-                              </a>
-                              <span>
-                                <a href="javascript:void(0)" class="btn icon-left primary-btn">
-                                    <i class="lni lni-play"></i>
-                                    next
-                                </a>
-                              </span>
-                          </div>
                           <!-- tabs one -->
                         </div>
-                      </div>                  
+                      </div>   
+                      <ul >
+                        <li id="success" class="text-success border-success" hidden>
+                          <i class=" lni lni-checkmark-circle " ></i> Successfully found
+                        </li> 
+                        <li id="failed" class="text-danger border-danger" hidden>
+                          <i class=" lni lni-checkmark-circle " ></i> Not Valid choice
+                        </li> 
+                      </ul>              
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="content">
@@ -283,25 +295,200 @@
                     ///////////////
                 </div>
                 </div>
+                <div class="text-end p-3">
+                  <button  id="prev" class="btn primary-btn-outline disabled">
+                      previews
+                    </button>
+                    <span>
+                      <button  id="next" class="btn icon-left primary-btn">
+                          <i class="lni lni-play"></i>
+                          next
+                      </button>
+                    </span>
+                    <span>
+                      <button  id="submit" class="btn icon-left primary-btn disabled" >
+                          <i class="fa fa-send-o"></i>
+                          submit
+                      </button>
+                    </span>
+                </div>
               </div>
             </div>
           </div>
       </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>    
-        // script for tab steps
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    <script>  
+    var child; 
+    var order = 0; 
+    var type = [];
+    var tree;
+        function updatePills(tab_id,panel_id){
+          const tab_order = $("#"+tab_id).index();
+          $("#"+tab_id).nextAll(".tab-title").remove();    
+          $("#"+panel_id).nextAll(".tab-pane-internal").remove(); 
+          order = tab_order;
+        }
+        function updateSelectTabView(selection,parent,element){ 
+          
+          //console.log(element.dataset.location.split(","));
+          //console.log(selection,parent);
+          //const order = $(element).index();
+          const aria_labelledby_id = element.parentElement.parentElement.parentElement.getAttribute("aria-labelledby");
+          const panel_id = element.parentElement.parentElement.parentElement.id;
+          
+          
+          if(child!=""){
+            if(typeof parent === 'string'){
+              child = JSON.parse(parent)[selection];
+              tree = JSON.parse(parent);
+              type = [];
+            }
+            else if(order > $("#"+aria_labelledby_id).index()){
+              const list = element.dataset.location.split(",");
+              type = Object.values(Object.assign({},list));
+              let res = Object.assign({}, tree);
+              while(list.length>0){
+                res = res[list.shift()];
+              }
+              child = res;
+              console.log(type);
+            }
+            else{
+              child = parent[selection];
+            }  
 
-        var href = $(e.target).attr('href');
-        var $curr = $(".process-model  a[href='" + href + "']").parent();
+            updatePills(aria_labelledby_id,panel_id);
+            $(element).addClass("active not-editable");
+            $(element).nextAll().removeClass("active not-editable");
+            $(element).prevAll().removeClass("active not-editable");
+            
+            $('.tab-title').removeClass('active');
+            if(child!=""){
+              // type of the post
+              type.push(selection);
+              // add options if exists
+              order++;
+              $('.tab-pane-internal').removeClass("show active");
+              const pill = `<a class="tab-title active" id="pill-${order}" data-bs-toggle="pill" role="tab" href="#pill-content-${order}" 
+                            aria-controls="pills-content-${order}" aria-selected="true"><i class="lni lni-vector"></i>${selection}</a>`;
+              
+              const pill_content = `<div class="tab-pane-internal active show fade" id="pill-content-${order}" role="tabpanel"
+                                        aria-labelledby="pill-${order}">
+                                        <div class="tab-text">
+                                            <ul class="list-group" id="list-${order}">
+                                            </ul>
+                                        </div>
+                                      </div>`;                      
+              $("#pills-div").append(pill);
+              $("#pills-content-div").append(pill_content);
+              let temp = Object.assign(type); 
+              Object.keys(child).forEach(key =>{
+                temp.push(key);
+                const li = `<li class="list-group-item btn btn-primary" aria-current="true" onclick="updateSelectTabView('${key}',child,this)" id="${key}" data-location='${temp}'>${key}</li>`;
+                $("#list-"+(order)).append(li);
+                temp.pop();
+              });
+            }
+            else {
+              type.push(selection);
+              $("#"+aria_labelledby_id).addClass("not-editable");   
+              $("#"+aria_labelledby_id).prevAll().addClass("not-editable");   
+              $(element).nextAll().addClass("not-editable");
+              $(element).prevAll().addClass("not-editable");
+              showContentTab();
+            }
+          }
+          else {
+            $('#failed').removeAttr('hidden');
+            setTimeout(() => {
+                $('#failed').attr('hidden', true);
+              }, 1000);
+          }
+        }    
+        $( document ).ready(function() {
 
-        $('.process-model li').removeClass();
+          var child = 1;
+          var length = $(".tab-pane").length-1;
+          
+          $("#prev").addClass("disabled");
+          $("#next").addClass("disabled");
+          $("#submit").addClass("disabled");
 
-        $curr.addClass("active");
-        $curr.prevAll().addClass("visited");
+          $(".tab-pane").not(".tab-pane:nth-of-type(1)").hide();
+          $(".tab-pane").not(".tab-pane:nth-of-type(1)").css('transform','translateX(100px)');
+
+          $(".btn").click(function () {
+
+          var id = $(this).attr("id");
+
+          if (id == "next") {
+            $("#prev").removeClass("disabled");
+            if (child >= length) {
+              $(this).addClass("disabled");
+              $('#submit').removeClass("disabled");
+            }
+            if (child <= length) {
+              $(".circle:nth(" + child + ")").addClass("active");
+              $(`.process-model li:nth( ${child-1})`).addClass("visited");
+              child++;
+            }
+          } else if (id == "prev") {
+            $("#next").removeClass("disabled");
+            $('#submit').addClass("disabled");
+            if (child <= 2) {
+              $(this).addClass("disabled");
+            }
+            if (child > 1) {
+              child--;
+              $(".circle:nth(" + child + ")").removeClass("active");
+              $(`.process-model li:nth( ${child-1})`).removeClass("visited");
+            }
+          }
+          var currentSection = $(".tab-pane:nth-of-type(" + child + ")");
+          currentSection.fadeIn();
+          currentSection.css('transform','translateX(0)');
+          currentSection.prevAll('.tab-pane').css('transform','translateX(-100px)');
+          currentSection.nextAll('.tab-pane').css('transform','translateX(100px)');
+          $('.tab-pane').not(currentSection).hide();
+        }); 
+      });
+      function showContentTab(){
+        //console.log(type);
+        url = "/api/posts/getObjectTemplate";
+        $.ajax({
+          type: "POST",
+          cache: false,
+          async: false,
+          contentType: 'application/json; charset=utf-8',
+          Accept: "application/json charset=utf-8",
+          url: url,
+          data : JSON.stringify({type:type}), 
+          success: function (response,status) {
+            if(status=="success"){
+              $('#success').removeAttr('hidden');
+              setTimeout(() => {
+                $('#success').attr('hidden', true);
+              }, 1000);
+              $("#next").removeClass("disabled");
+              /////////////////////////////////////////////////////////////////
+            }
+            else{
+              $('#failed').removeAttr('hidden');
+              setTimeout(() => {
+                $('#failed').attr('hidden', true);
+              }, 1000);
+            }
+          },
+          error: function (e) {
+            console.log(e);
+            $('#failed').removeAttr('hidden');
+              setTimeout(() => {
+                $('#failed').attr('hidden', true);
+              }, 1000);
+          }
         });
-        // end  script for tab steps
+      }
     </script>
   </body>
 </html>

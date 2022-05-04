@@ -10,6 +10,12 @@ router.get('/addPost', postController.getAddPostPage);
 
 router.get('/', postController.getAllPosts);
 
+router.post(
+  '/getObjectTemplate',
+  isAuthenticated,
+  postController.getObjectTemplate
+);
+
 router.post('/', isAuthenticated, postController.addNewPost);
 
 router.put('/:id', isAuthenticated, postController.updatePost);

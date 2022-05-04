@@ -1,6 +1,21 @@
 {
-  "catagories": [
-    { "real estate": ["house", "land"] },
-    { "vehicle": ["car", "van"] }
-  ]
+  "catagories": {
+    "real estate": { "house": "", "land": "" },
+    "vehicle": {
+      "car": "",
+      "van": {
+        "tusan": {
+          "2021": "",
+          "2022": ""
+        },
+        "toyota": "",
+        "honda": "",
+        "nissan": "",
+        "mitsubishi": "",
+        "truck": "",
+        "sozuki": "",
+        "maruti": ""
+      }
+    }
+  }
 }

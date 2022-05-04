@@ -68,6 +68,14 @@ module.exports = {
     const tree = JSON.parse(JSON.stringify(itemTree));
     res.render('addPost', { user: req.user, loggedIn, tree });
   },
+  getObjectTemplate: async (req, res) => {
+    try {
+      const resp = itemFactory.createItem(req.body?.type);
+      return res.status(200).json(resp);
+    } catch (error) {
+      return res.status(422).json(error);
+    }
+  },
   updatePost: async (req, res) => {
     const { id } = req.params;
     try {

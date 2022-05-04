@@ -10,6 +10,14 @@ class Car {
   statue;
 
   constructor(obj) {
+    if (!obj) {
+      this.brand = '';
+      this.color = '';
+      this.name = '';
+      this.modelYear = new Date().getFullYear();
+      this.statue = false;
+      return;
+    }
     if (!obj || !obj.brand || !obj.color || !obj.name || !obj.modelYear)
       throw new Error('car description validation error');
     this.brand = obj.brand;
