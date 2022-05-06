@@ -399,17 +399,21 @@ a{
                                         <div class="username mt-2"><strong><%=post.comments[i].creator.fullName%></strong></div>
                                         <div class=" d-flex ">
                                             <p id="commentText<%=i%>" class="text-muted mb-0 col-md-5"><%=post.comments[i].text%></p>
-                                            <%if(user && user._id == post.comments[i].creator._id.toString()){%>
+                                            <%if(user && (user._id == post.comments[i].creator._id.toString() || user.isAdmin)){%>
                                             <div class="editedForm<%=i%> col-md-7 pr-0">
                                                 <div class="d-flex justify-content-end w-100">
+                                                    <% if(user._id == post.comments[i].creator._id.toString()){%>
                                                     <form class = "d-flex " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=PUT" method="post">
                                                             <input class="mr-5 form-control ml-1 shadow-none textarea" type= "text" id= "commentTextUpdate<%=i%>" name= "text" value="<%=post.comments[i].text%>" hidden="true">
                                                             <button class=" ml-5 mx-1 text-white btn-info btn-sm shadow-none" id = "apply<%=i%>" type="submit"  style="display: none;">apply</button>
                                                             <button class = "mx-1 btn-info btn-sm text-white shadow-none" id = "edit<%=i%>" type="button"  onclick="editForm(<%=i%>)">edit</button>
                                                     </form>
+                                                    <%}%>
+                                                    <%if(user && user._id == post.comments[i].creator._id.toString() || user.isAdmin){%>
                                                     <form class="d-flex " action="/api/posts/<%=post._id%>/comments/<%=post.comments[i]._id%>?_method=DELETE" method="post">
                                                         <button type="submit" class="btn-danger btn-sm shadow-none">delete</button>
                                                     </form>
+                                                    <%}%>
                                             </div>
                                             </div>
                                             <%}%>

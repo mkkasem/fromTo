@@ -127,7 +127,10 @@ module.exports = {
     try {
       const post = await Post.findById(id);
       const comment = post.comments.find((c) => c.id === commentid);
-      if (id && req.user._id === comment.creator.toString()) {
+      if (
+        id &&
+        (req.user._id === comment.creator.toString() || req.user.isAdmin)
+      ) {
         const indexOfComment = post.comments.indexOf(comment);
         post.comments.splice(indexOfComment, 1);
         await post.save();
