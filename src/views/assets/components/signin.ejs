@@ -50,7 +50,7 @@
     <section class="signin-area signin-one">
       <div class="container">
         <% if(locals.error){ %>
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
             <strong><%=error%> </strong> 
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
@@ -83,11 +83,14 @@
                     </div>
                     <!-- form input -->
                   </div>
-                  <div class="col-md-12 mt-2">
-                    <div class="form-group form-check">
+                  <div class="col-md-12 my-2 d-flex">
+                    <div class="form-group form-check col-6">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberMe">
                       <label class="form-check-label" for="exampleCheck1">Remember me</label>
                     </div>
+                    <div class="col-6 d-md-flex justify-content-end">
+                    <a href="/api/auth/forget-password">Forget password?</a>
+                  </div>
                   </div>
                     <!-- form input -->
                   <div class="col-md-6">

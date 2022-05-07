@@ -33,6 +33,16 @@ router
 
 router.get('/signout', authController.signOut);
 
+router
+  .route('/forget-password')
+  .get((req, res) => res.render('forgetPassword', { error: [] }))
+  .post(authController.forgetPassword);
+
+router
+  .route('/reset-password/:id/:token')
+  .get(authController.getResetPassword)
+  .post(authController.postResetPassword);
+
 router.get(
   '/google',
   redirectToHomeIfAuthenticated,
