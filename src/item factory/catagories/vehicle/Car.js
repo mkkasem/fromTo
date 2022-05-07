@@ -11,10 +11,10 @@ class Car {
 
   constructor(obj) {
     if (!obj) {
-      this.brand = '';
-      this.color = '';
-      this.name = '';
-      this.modelYear = new Date().getFullYear();
+      this.brand = 'String';
+      this.color = 'String';
+      this.name = 'String';
+      this.modelYear = new Date('1970').getFullYear();
       this.statue = false;
       return;
     }

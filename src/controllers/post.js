@@ -66,7 +66,7 @@ module.exports = {
     if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
     const loggedIn = !!user || false;
     const tree = JSON.parse(JSON.stringify(itemTree));
-    res.render('addPost', { user: req.user, loggedIn, tree });
+    res.render('addPost', { user, loggedIn, tree });
   },
   getObjectTemplate: async (req, res) => {
     try {
