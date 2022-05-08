@@ -360,7 +360,22 @@ a{
 
   <body>
     <%- include("navbar");-%> 
-    
+    <div class="container">
+       
+        <%console.log(post?.status) %>
+        <%if(post.status==="pending" && user.isAdmin){ %>
+            <div class="alert alert-warning text-center">
+                <strong>Warning!</strong> This post is waiting for approval.
+            </div>
+      
+            <form class="w-100 d-flex justify-content-center" action="/api/posts/setPostStatus/<%=post._id%>?_method=PUT" method="post">
+                <input type="hidden" name="status" id="status" value="approved">
+                <button type="submit" class="col-6 btn btn-success" onclick="getElementById('status').value='approved'">Approve</button>
+                <button type="submit" class="col-6 btn btn-danger" onclick="getElementById('status').value='rejected'">reject</button>
+            </form>
+                   
+        <%}%>
+    </div>
     <div class="container mt-2 mb-3">
         <div class="row no-gutters">
             <div class="col-md-5 pr-2">

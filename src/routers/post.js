@@ -11,9 +11,9 @@ router.get('/', postController.getAllPosts);
 
 router.post('/', isAuthenticated, postController.addNewPost);
 
-router.get('/pendingPosts', onlyAdmin, (req, res) => {
-  res.render('pendingPosts', { user: req.user, loggedIn: true });
-});
+router.get('/pendingPosts', onlyAdmin, postController.getPendingPosts);
+router.put('/setPostStatus/:id', onlyAdmin, postController.setPostStatus);
+
 router.put('/:id', isAuthenticated, postController.updatePost);
 
 router.delete('/:id', isAuthenticated, postController.deletePost);

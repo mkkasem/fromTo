@@ -22,7 +22,7 @@ router.get('/profile', isAuthenticated, (req, res) => {
 router.get('/search', userController.searchForUser);
 router.get('/admins', userController.getAllAdmins);
 router.get('/:id', userController.getOneUser);
-router.put('/:id', userController.editProfile);
+router.put('/:id', isAuthenticated, userController.editProfile);
 router.delete('/:id', userController.deleteUser);
 
 module.exports = router;

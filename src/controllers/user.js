@@ -73,7 +73,8 @@ module.exports = {
       //  check authority for the user
       // admin can not update other admin profile
       const user = await User.findById(id);
-      if (user.isAdmin) throw authorizationError;
+
+      if (user.isAdmin && req.user._id !== user.id) throw authorizationError;
 
       if ((password || passwordConfirm) && password !== passwordConfirm) {
         throw passwordDontMatchError;

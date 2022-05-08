@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     // check if user is logged in from cookie
     const loggedIn = !!user || false;
     // draw posts when user is logged in
-    const posts = await Post.find({})
+    const posts = await Post.find({ status: 'approved' })
       .populate('owner')
       .populate('comments.creator');
 

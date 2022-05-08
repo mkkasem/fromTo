@@ -242,4 +242,24 @@ module.exports = {
       filterPosts(res, query);
     }
   },
+  getPendingPosts: async (req, res) => {
+    const posts = await Post.find({ status: 'pending' });
+    res.render('pendingPosts', { user: req.user, loggedIn: true, posts });
+  },
+  setPostStatus: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      const post = await Post.findById(id);
+      if (status === 'rejected') {
+        await Post.findByIdAndDelete(id);
+        return res.redirect('/');
+      }
+      post.status = status;
+      await post.save();
+      return res.redirect(303, `/api/posts/${id}`);
+    } catch (error) {
+      return res.redirect('/');
+    }
+  },
 };
