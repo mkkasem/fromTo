@@ -368,6 +368,12 @@ h6 {
         margin-top: 2%
     }
 }
+.tab-content{
+    display: none;
+}
+.active {
+    display: block;
+}
     </style>
   </head>
 
@@ -375,79 +381,42 @@ h6 {
     <div class="container">
         <!-- <div class="filter"> <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span></button>
         </div> -->
-        <div id="mobile-filter">
-            <p class="pl-sm-0 pl-2"> Home | <b>All Breads</b></p>
-            <div class="border-bottom pb-2 ml-2">
-                <h4 id="burgundy">Filters</h4>
-            </div>
-            <div class="py-2 border-bottom ml-3">
-                <h6 class="font-weight-bold">Categories</h6>
-                <div id="orange"><span class="fa fa-minus"></span></div>
-                <form>
-                    <div class="form-group"> <input type="checkbox" id="artisan"> <label for="artisan">Fresh Artisan Breads</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="breakfast"> <label for="breakfast">Breakfast Breads</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="healthy"> <label for="healthy">Healthy Breads</label> </div>
-                </form>
-            </div>
-            <div class="py-2 border-bottom ml-3">
-                <h6 class="font-weight-bold">Accompainments</h6>
-                <div id="orange"><span class="fa fa-minus"></span></div>
-                <form>
-                    <div class="form-group"> <input type="checkbox" id="tea"> <label for="tea">Tea Cakes</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="cookies"> <label for="cookies">Cookies</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="pastries"> <label for="pastries">Pastries</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="dough"> <label for="dough">Cookie Dough</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="choco"> <label for="choco">Chocolates</label> </div>
-                </form>
-            </div>
-            <div class="py-2 ml-3">
-                <h6 class="font-weight-bold">Top Offers</h6>
-                <div id="orange"><span class="fa fa-minus"></span></div>
-                <form>
-                    <div class="form-group"> <input type="checkbox" id="25off"> <label for="25">25% off</label> </div>
-                    <div class="form-group"> <input type="checkbox" id="5off"> <label for="5off" id="off">5% off on artisan breads</label> </div>
-                </form>
-            </div>
-        </div>
         <div class="row mx-0">
             <section id="sidebar">
-                <p> Home | <b>All Breads</b></p>
+                <p> Home <b id="path"></b></p>
                 <div class="border-bottom pb-2 ml-2">
                     <h4 id="burgundy">Filters</h4>
                 </div>
-                <div class="py-2 border-bottom ml-3">
-                    <h6 class="font-weight-bold">Categories</h6>
-                    <div id="orange"><span class="fa fa-minus"></span></div>
-                    <form>
-                        <div class="form-group"> <input type="checkbox" id="artisan"> <label for="artisan">Fresh Artisan Breads</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="breakfast"> <label for="breakfast">Breakfast Breads</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="healthy"> <label for="healthy">Healthy Breads</label> </div>
-                    </form>
+                <div class="filter-tabs p-3">
+                    <div class="filter-tab-item pr-2" id="filter-tab-1"> <span class="fa fa-filter"></span>  
+                        <a href="#catagories" data-toggle="tab" role="tab" id="catagories" data-location="catagories" onclick="titleAnchorClicked(this)"><h6 class="font-weight-bold" id="tab-title-1"></h6>categories</h6></a>
+                        <div class="tab-content active px-2" id="tab-content-1">
+                            <%if(locals.tree){ %>
+                                <%Object.keys(locals.tree.catagories).forEach(key =>{%>
+                                    <div class="form-group" id="div-<%=key%>"><a href="#<%=key%>" data-toggle="tab" role="tab" id="<%=key%>" data-location="<%=key%>" onclick="anchorClicked(this)"><%=key%></a></div>
+                                  <%})%>
+                            <%}%>
+                        </div>
+                    </div>
                 </div>
-                <div class="py-2 border-bottom ml-3">
-                    <h6 class="font-weight-bold">Accompainments</h6>
-                    <div id="orange"><span class="fa fa-minus"></span></div>
-                    <form>
-                        <div class="form-group"> <input type="checkbox" id="tea"> <label for="tea">Tea Cakes</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="cookies"> <label for="cookies">Cookies</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="pastries"> <label for="pastries">Pastries</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="dough"> <label for="dough">Cookie Dough</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="choco"> <label for="choco">Chocolates</label> </div>
-                    </form>
+                <hr>
+                <h6 class="h6 m-3 semi-bold">Price Filter</h6>
+                <div class="filter-fixed d-md-flex p-2 mb-2">                    
+                    <label  class="labels m-2" for="price-filter">min</label>
+                    <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="min-price">
+                    <label class="labels m-2" for="price-filter">max</label>
+                    <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="max-price">
                 </div>
-                <div class="py-2 ml-3">
-                    <h6 class="font-weight-bold">Top Offers</h6>
-                    <div id="orange"><span class="fa fa-minus"></span></div>
-                    <form>
-                        <div class="form-group"> <input type="checkbox" id="25off"> <label for="25">25% off</label> </div>
-                        <div class="form-group"> <input type="checkbox" id="5off"> <label for="5off" id="off">5% off on artisan breads</label> </div>
-                    </form>
+                <hr>
+                <div id="description-filter">
+
                 </div>
+                <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter" onclick="filterPosts()">Filter<span class="fa fa-filter pl-1"></span></button>
             </section>
         
             <section id="products">
                 <div class="container">
-                    <div class="row">
+                    <div class="row pb-5" id="posts-container">
                         <%if(locals.posts){ posts.forEach((post)=>{%>
                         <a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2" href="api/posts/<%=post.id%>">
                             <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( <%=post.id.toString()%>" > -->
@@ -473,6 +442,218 @@ h6 {
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
 <script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+<script>
+    var respond;
+    var type_filter = [];
+    function anchorClicked(element) {
+            
+            $('.tab-content').removeClass('active');
+            
+            const list = element.dataset.location.split(",");
+            const type = Object.assign([], list);
+            let res = Object.assign({}, JSON.parse('<%- JSON.stringify(tree.catagories) %>'));
+            if(list[0] === "catagories"){
+                list.shift();
+            }
+            while(list[0] !== "catagories" && list.length>0){
+                res = res[list.shift()];
+            }  
+            const order = ++ $('.filter-tab-item').length;
 
+            const filter_tab =(type,parent)=>`<div class="filter-tab-item pr-2" id="filter-tab-${order}"> <span class="fa fa-filter"></span>  
+                                                    <a href="#${parent}" data-toggle="tab" role="tab" id="${parent}" data-location="${type}" onclick="titleAnchorClicked(this)"><h6 class="font-weight-bold" id="tab-title-1"></h6>${parent}</h6></a>
+                                                    <ul class="tab-content active px-2" id="tab-content-${order}">
+                                                    </ul>
+                                                </div>`;
+            $('.filter-tabs').append(filter_tab(type,element.id));   
+
+            const div=(type,key)=>`<li class="form-group" id="div-${key}"><a href="#${key}" data-toggle="tab" role="tab" id="${key}" data-location="${type}" onclick="anchorClicked(this)">${key}</a></li>`;
+
+            Object.keys(res).forEach(key =>{
+                type.push(key);
+                $(`#tab-content-${order}`).append(div(type,key));
+                type.pop();
+            });
+            $(`#path`).empty();
+            type.forEach(key =>{
+                $(`#path`).append(`> ${key} `);
+            });
+            if(type[0] === "catagories"){
+                type.shift();
+            }
+            $('#description-filter').empty();
+            if(res === ""){
+                getDescription(type);
+            }
+            type_filter = Object.assign([], type);
+            filterPosts(type);
+        }
+        function titleAnchorClicked(element) {
+            const id = element.id.toString();
+            const order = $('#'+element.parentElement.id).index() + 1 ;
+
+            $('#'+element.parentElement.id).nextAll('.filter-tab-item').remove();
+            $('#'+element.parentElement.id).remove();
+            
+            const list = element.dataset.location.split(",");
+            const type = Object.assign([], list);
+            let res = Object.assign({}, JSON.parse('<%- JSON.stringify(tree.catagories) %>'));
+            
+            if(list[0] === "catagories"){
+                list.shift();
+            }
+            while(list[0] !== "catagories" && list.length>0){
+                res = res[list.shift()];
+            }
+
+            const filter_tab =(type,parent)=>`<div class="filter-tab-item pr-2" id="filter-tab-${order}"> <span class="fa fa-filter"></span>  
+                                                    <a href="#${parent}" data-toggle="tab" role="tab" id="${parent}" data-location="${type}" onclick="titleAnchorClicked(this)"><h6 class="font-weight-bold" id="tab-title-1"></h6>${parent}</h6></a>
+                                                    <ul class="tab-content active px-2" id="tab-content-${order}">
+                                                    </ul>
+                                                </div>`;
+            $('.filter-tabs').append(filter_tab(type,id));   
+
+            const div=(type,key)=>`<li class="form-group" id="div-${key}"><a href="#${key}" data-toggle="tab" role="tab" id="${key}" data-location="${type}" onclick="anchorClicked(this)">${key}</a></li>`;
+
+            Object.keys(res).forEach(key =>{
+                type.push(key);
+                $(`#tab-content-${order}`).append(div(type,key));
+                type.pop();
+            });
+            type_filter = Object.assign([],type);
+            filterPosts(type);
+        }
+        function filterPosts(type){
+            if(!type){
+                type = type_filter;
+            }
+
+            const min_price = $('#min-price').val();
+            const max_price = $('#max-price').val();
+
+            url = "/api/posts/filter?";
+            if(type[0] === "catagories"){
+                type.shift();
+            }
+            if(type.length>0){
+                url += "type="+type.toString().replace(",","-");
+            }
+
+            if(min_price !== "" && min_price >= 0){ 
+                url += "&min_price="+min_price;
+            }
+            if(max_price !== "" && max_price >= 0){
+                url += "&max_price="+max_price;
+            }
+            if($('#description-filter').children().length > 0){
+                Object.keys(respond).forEach((key) =>{
+                        if(respond[key] === "String"){
+                            if($('#des-attr-'+key).val()){
+                                url += "&"+key+"="+$('#des-attr-'+key).val();
+                            }
+                        }else if(respond[key] === 1970){
+                            if($('#des-attr-'+key).val()){
+                                url += "&"+key+"="+$('#des-attr-'+key).val();
+                            }
+                        }else if(respond[key] === false){
+                            if($('#des-attr-'+key).is(':checked')){
+                                url += "&"+key+"="+$('#des-attr-'+key).is(':checked');
+                            }
+                        }
+                })
+            }
+            
+            $.ajax({
+                type: "GET",
+                cache: true,
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                Accept: "application/json charset=utf-8",
+                url: url,
+                success: function (response,status) {
+
+
+                    const _post =(post)=> `<a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2" href="api/posts/${post._id}">
+                            <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( ${post._id.toString()}" > -->
+                                <div class="card w-100" style="cursor: pointer;" > <img class="card-img-top" src="${post.image}">
+                                    <div class="card-body Regular shadow ">
+                                        <h5><b>${post.title}</b> </h5>
+                                        <div class="d-flex flex-row my-2">
+                                            <div class="text-muted text-success">
+                                                <strong class="text-success">${post.price} $</strong>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </a>`;
+                    $('#posts-container').empty();
+                    if(response && response.length>0){
+                        response.forEach(post =>{
+                            $('#posts-container').append(_post(post));
+                        });
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+        function getDescription(type){
+            url = "/api/posts/getObjectTemplate";
+            $.ajax({
+                type: "POST",
+                cache: false,
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                Accept: "application/json charset=utf-8",
+                url: url,
+                data : JSON.stringify({type:type}), 
+                success: function (response,status) {
+                    
+                    if(status=="success"){
+                    respond = response;
+                    
+                    const des_title = `<h6 class="h6 m-3 semi-bold">Description Filter</h6>`;
+                    const text_input=(s) =>`<div class="row">
+                                    <div class="col-md-6 m-2">
+                                    <label class="labels">${s}</label>
+                                    <input type="text" class="form-control" id="des-attr-${s}">
+                                    </div>
+                                </div>`;
+                    const number_input= (s) =>`<div class="row">
+                                    <div class="col-md-6 m-2">
+                                    <label class="labels">${s}</label>
+                                    <input type="number" class="form-control" id="des-attr-${s}">
+                                    </div>
+                                </div>`;
+                    const checkbox_input=(s) =>`<div class="row">
+                                    <div class="col-md-6 m-2">
+                                    <input class="form-check-input" type="checkbox" value="false" id="des-attr-${s}">
+                                    <label class="form-check-label" for="des-attr-${s}">${s}</label>
+                                    </div>
+                                </div>`;
+                    $('#description-filter').empty();
+                    $('#description-filter').append(des_title);
+                    Object.keys(response).forEach((key) =>{
+                        if(response[key]==="String"){
+                        $('#description-filter').append(text_input(key));
+                        }else if(response[key]===1970){
+                        $('#description-filter').append(number_input(key));
+                        }else if(response[key]===false){
+                        $('#description-filter').append(checkbox_input(key));
+                        }
+                    })
+                    }
+                    else{
+                        console.log("error");
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+</script>
 </body>
 </html>

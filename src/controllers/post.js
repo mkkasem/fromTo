@@ -159,7 +159,8 @@ module.exports = {
     try {
       const posts = await Post.find().sort({ createdAt: -1 });
       if (!posts) res.status(204).json({ message: `there are no posts` });
-      res.json({ posts });
+      const tree = JSON.parse(JSON.stringify(itemTree));
+      res.json({ posts, tree });
       //  else res.status(200).render('home', { posts });
     } catch (err) {
       res.status(403).json({ message: err.message });
@@ -224,7 +225,7 @@ module.exports = {
       const typeSecuence = type.split('-');
       const query = {
         $and: [
-          { type: { $in: typeSecuence } },
+          { type: { $all: typeSecuence } },
           { price: { $gte: min_price || 0 } },
           { price: { $lte: max_price || Infinity } },
         ],

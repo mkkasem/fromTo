@@ -4,6 +4,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
 const logger = require('../services/logger');
+const itemTree = require('../item factory/catagoriesTree.json');
 
 const router = express.Router();
 
@@ -22,8 +23,8 @@ router.get('/', async (req, res) => {
 
     // TOFIX: only user necessary attributes should be sent , not all
     user = user || {};
-
-    res.render('home', { posts, loggedIn, user });
+    const tree = JSON.parse(JSON.stringify(itemTree));
+    res.render('home', { posts, loggedIn, user, tree });
   } catch (error) {
     logger.error(error);
   }
