@@ -396,7 +396,7 @@ a{
                     <%if(user){%>
                     <div class="bg-light p-2">
                         <form action="/api/posts/<%=post._id%>/comments" method="post">
-                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="<%= user.avatar%>" style="max-width: 75px !important; max-height: 75px !important;">
+                            <div class="d-flex flex-row align-items-center"><img class="rounded-circle" src="<%= user.avatar%>" style="max-width: 40px !important; max-height: 75px !important;">
                                 <textarea  class="form-control ml-1 shadow-none textarea" name= "text"></textarea>
                             </div>
                             <div class="mt-2 text-right">

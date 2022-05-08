@@ -6,6 +6,7 @@ const Post = require('../models/post');
 const authorizationError = { message: 'you dont have this authorization' };
 // const randomError = { message: 'something went wrong' };
 const ItemFactory = require('../item factory/itemFactory');
+const itemTree = require('../item factory/catagoriesTree.json');
 
 const itemFactory = new ItemFactory();
 async function savePost(req, type = 'create') {
@@ -59,6 +60,22 @@ const filterPosts = async (res, query) => {
   }
 };
 module.exports = {
+  getAddPostPage: async (req, res) => {
+    const { token } = req.cookies;
+    let user;
+    if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
+    const loggedIn = !!user || false;
+    const tree = JSON.parse(JSON.stringify(itemTree));
+    res.render('addPost', { user, loggedIn, tree });
+  },
+  getObjectTemplate: async (req, res) => {
+    try {
+      const resp = itemFactory.createItem(req.body?.type);
+      return res.status(200).json(resp);
+    } catch (error) {
+      return res.status(422).json(error);
+    }
+  },
   updatePost: async (req, res) => {
     const { id } = req.params;
     try {

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--====== Title ======-->
+    <title>title</title>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="/images/favicon.svg" type="image/svg"/>
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="/css/lineicons.css" />
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="/scss/starter.css" />
+
+    <link rel="stylesheet" href="/scss/footers/footer-01.css" />
+    <!--add style if exists-->
+    <link rel="stylesheet" href="/scss/tabs-accordions/tabs.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    
+    <style>
+ .design-process-section .text-align-center {
+    line-height: 25px;
+    margin-bottom: 12px;
+}
+.design-process-content {
+    border: 1px solid #e9e9e9;
+    position: relative;
+    padding: 16px 20% 30px 20%;
+}
+.design-process-content img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    max-height: 100%;
+}
+.design-process-content h3 {
+    margin-bottom: 16px;
+}
+.design-process-content p {
+    line-height: 26px;
+    margin-bottom: 12px;
+}
+.process-model {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    max-width: 600px;
+    margin: 20px auto 26px;
+    border: none;
+    z-index: 0;
+}
+.process-model li::after {
+    background: #e5e5e5 none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 4px;
+    margin: 0 auto;
+    position: relative;
+    right: -60px;
+    top: -68px;
+    width: 85%;
+    z-index: -1;
+}
+.process-model li.visited::after {
+    background: #57b87b;
+}
+.process-model li:last-child::after {
+    width: 0;
+}
+.process-model li {
+    display: inline-block;
+    width: 18%;
+    text-align: center;
+    float: none;
+}
+.nav-tabs.process-model ,.nav-tabs.process-model > li.active > a, .nav-tabs.process-model > li.active > a:hover, .nav-tabs.process-model > li.active > a:focus, .process-model li a:hover, .process-model li a:focus {
+    border: none;
+    background: transparent;
+
+}
+.process-model li a {
+    padding: 0;
+    border: none;
+    color: #606060;
+}
+.process-model li.active,
+.process-model li.visited {
+    color: #57b87b;
+}
+.process-model li.active a,
+.process-model li.active a:hover,
+.process-model li.active a:focus,
+.process-model li.visited a,
+.process-model li.visited a:hover,
+.process-model li.visited a:focus {
+    color: #57b87b;
+}
+.process-model li.active p,
+.process-model li.visited p {
+    font-weight: 600;
+}
+.process-model li i {
+    display: block;
+    height: 68px;
+    width: 68px;
+    text-align: center;
+    margin: 0 auto;
+    background: #f5f6f7;
+    border: 2px solid #e5e5e5;
+    line-height: 65px;
+    font-size: 30px;
+    border-radius: 50%;
+}
+.process-model li.active i, .process-model li.visited i  {
+    background: #fff;
+    border-color: #57b87b;
+}
+.process-model li p {
+    font-size: 14px;
+    margin-top: 11px;
+}
+.process-model.contact-us-tab li.visited a, .process-model.contact-us-tab li.visited p {
+    color: #606060!important;
+    font-weight: normal
+}
+.process-model.contact-us-tab li::after  {
+    display: none; 
+}
+.process-model.contact-us-tab li.visited i {
+    border-color: #e5e5e5; 
+}
+
+
+
+@media screen and (max-width: 560px) {
+  .more-icon-preocess.process-model li span {
+        font-size: 23px;
+        height: 50px;
+        line-height: 46px;
+        width: 50px;
+    }
+    .more-icon-preocess.process-model li::after {
+        top: 24px;
+    }
+}
+@media screen and (max-width: 380px) { 
+    .process-model.more-icon-preocess li {
+        width: 16%;
+    }
+    .more-icon-preocess.process-model li span {
+        font-size: 16px;
+        height: 35px;
+        line-height: 32px;
+        width: 35px;
+    }
+    .more-icon-preocess.process-model li p {
+        font-size: 8px;
+    }
+    .more-icon-preocess.process-model li::after {
+        top: 18px;
+    }
+    .process-model.more-icon-preocess {
+        text-align: center;
+    }
+}
+.disabled{
+  display: none !important;
+}
+.fade{
+  display: none !important;
+}
+.show.fade {
+  display: block !important;
+}
+.not-editable{
+  pointer-events: none;
+}
+.label.primary-label {
+    background: var(--primary);
+    color: var(--white);
+}
+.label.rounded-full {
+    border-radius: 50px;
+    padding: 4px 12px;
+}
+
+    </style>
+    <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+  </head>
+
+  <body>
+    <%- include("navbar");-%> 
+    <section class="design-process-section" id="process-tab">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 justify-content-center">
+              <!-- design process steps-->
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs process-model more-icon-preocess justify-content-center" role="tablist">
+                <li role="presentation" class="active circle"><i class="fa fa-search" aria-hidden="true"></i>
+                    <p>Type</p>
+                  </a></li>
+                <li role="presentation" class="circle"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    <p>Content</p>
+                    </a></li>
+                <li role="presentation" class="circle"><i class="fa fa-send-o" aria-hidden="true"></i>
+                    <p>Preview</p>
+                  </a></li>
+                <li role="presentation" class="circle"><i class="fa fa-qrcode" aria-hidden="true"></i>
+                    <p>Approval</p>
+                  </a></li>
+              </ul>
+              <!-- end design process steps-->
+              <!-- Tab panes -->
+              <div class="tab-content pt-3">
+                <div role="tabpanel" class="tab-pane active" id="select">
+                  <div class="design-process-content">
+                    <div class="col-lg-12">
+                        <div class="tabs mt-5">
+                          <h4 class="tabs-title mb-30">Select Post Type</h4>
+                          <div class="single-tabs tabs-six">
+                            <div class="row no-gutters">
+                              <div class="col-sm-4">
+                                <div class="nav flex-column nav-pills" id="pills-div" role="tablist" aria-orientation="vertical">
+                                  <%if(locals.tree){ %>
+                                    <%Object.keys(locals.tree).forEach(key =>{%>
+                                     <a class="tab-title active" id="pill-0" data-bs-toggle="pill" href="#pill-content-0" role="tab" 
+                                      aria-controls="pills-content-0" aria-selected="true"><i class="lni lni-vector"></i><%=key%></a>
+                                      <%})%>
+                                    <%}%>
+                                </div>
+                              </div>
+                              <div class="col-sm-8">
+                                <div class="tab-content" id="pills-content-div">
+                                  <div class="tab-pane-internal fade show active" id="pill-content-0" role="tabpanel"
+                                    aria-labelledby="pill-0">
+                                    <div class="tab-text">
+                                        <ul class="list-group" id="list-0">
+                                          <%if(locals.tree.catagories){ %>
+                                            <%Object.keys(locals.tree.catagories).forEach(key =>{%>
+                                            <li class="list-group-item btn btn-primary" id="<%=key%>" aria-current="true" data-location="<%=key%>" onclick="updateSelectTabView('<%=key%>','<%= JSON.stringify(locals.tree.catagories)%>',this)"><%=key%></li>
+                                            <%})%>
+                                          <%}%>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- row -->
+                          </div>
+                          <!-- tabs one -->
+                        </div>
+                      </div>   
+                      <ul >
+                        <li id="success" class="text-success border-success" hidden>
+                          <i class=" lni lni-checkmark-circle " ></i> Successfully found
+                        </li> 
+                        <li id="failed" class="text-danger border-danger" hidden>
+                          <i class=" lni lni-checkmark-circle " ></i> Not Valid choice
+                        </li> 
+                      </ul>              
+                    </div>
+                </div>
+                  <div role="tabpanel" class="tab-pane" id="content">
+                    <!-- content form -->
+                    <div id="content-div" class="design-process-content">
+                      <h3 class="semi-bold">Post Content</h3>
+                      <div class="pt-0">
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                              <label class="labels"><strong>Post title</strong></label>
+                              <input type="text " id="title" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                              <strong><label class="labels">Price:</label></strong>
+                              <strong><label class="labels"> TL</label></strong>
+                              <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="price">
+                            </div>
+                        </div>
+                        <hr class="d-flex justify-content-center">
+                        <h5 class="labels">Description:</h5>
+                      </div>    
+                    </div>
+                    <!-- end content form --> 
+                  </div>
+                <div role="tabpanel" class="tab-pane" id="preview">
+                  <div class="">
+                    <h3 class="semi-bold">Preview</h3>
+                    <div class="post-preview-div">
+                      <!-- post preview -->
+                      <div class="container mt-2 mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-5 pr-2">
+                                <div class="card">
+                                    <div class="demo" >
+                                        <ul id="lightSlider" >
+                                            <li data-thumb="" id="preview-thumb">
+                                                <img src="" id="preview-img"/>
+                                            </li>
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <h6>Reviews</h6>
+                                    <div class="comment-section">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card p-3">
+                                    <div class="container d-md-flex">
+                                        <div class="about col-md-7 "> <h1 class="font-weight-bold" id="preview-title"></h1>
+                                            <h4 class="font-weight-bold text-success mt-2" id="preview-price"> $</h4>
+                                            <div class="" id="preview-type">  
+                                            </div>      
+                                        </div>
+                                        <div class="row d-md-flex text-center col-md-5">
+                                                <div class="contact-box">
+                                                    <a class = "mb-2" ref="#profile.html">
+                                                        <div class="d-md-flex justify-content-center mb-2 ">
+                                                            <img class= "rounded-circle" src="<%=user.avatar%>" style="max-width: 100px !important; max-height: 100px !important;">
+                                                        </div>
+                                                        <h5 class="d-md-flex justify-content-center"><strong><%=user.fullName%></strong></h5>                                    
+                                                    </a>
+                                                    <div class="contact-box-footer">
+                                                        <div class="m-t-xs btn-group d-md-block">
+                                                            <%if(user.phone){ %>
+                                                            <a class=" btn-xs btn-white text-black d-md-block d-sm-flex flex-warp"><i class="fa fa-phone"></i> <%= user.phone%> </a>
+                                                            <%}%>
+                                                            <a class=" btn-xs btn-white text-black d-md-block d-sm-flex flex-warp"><i class="fa fa-envelope"></i> <%=user.email%></a>
+                                                        </div>
+                                                    </div>
+                                            
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="product-description">
+                                        <div class="mt-2"> <h3 class="font-weight-bold mb-2">Description</h3>   
+                                            <hr>
+                                            <div id="preview-description">
+                                            </div>
+                                            <div class="bullets">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      <!-- post preview -->
+                      <ul >
+                        <li id="create-post-failed" class="text-danger border-danger" hidden>
+                          <i class=" lni lni-checkmark-circle " ></i> you should complete the form properly
+                        </li> 
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="approval">
+                  <div class="design-process-content">
+                    <h3 class="semi-bold">Approval</h3>
+                      <h5  class="h5">Your post is waiting for approval </h5>                 
+                  </div>
+                </div>
+                <div class="text-end p-3">
+                  <button  id="prev" class="btn primary-btn-outline disabled">
+                      previews
+                    </button>
+                    <span>
+                      <button  id="next" class="btn icon-left primary-btn">
+                          <i class="lni lni-play"></i>
+                          next
+                      </button>
+                    </span>
+                    <span>
+                      <button  id="submit" class="btn icon-left primary-btn disabled" onclick="showApprovalTab()">
+                          <i class="fa fa-send-o"></i>
+                          submit
+                      </button>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+      <script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+      <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+    <script> 
+    var child_tab = 1;
+    var child; 
+    var order = 0; 
+    var type = [];
+    var tree;
+    var respond;
+    var post ;
+        function updatePills(tab_id,panel_id){
+          const tab_order = $("#"+tab_id).index();
+          $("#"+tab_id).nextAll(".tab-title").remove();    
+          $("#"+panel_id).nextAll(".tab-pane-internal").remove(); 
+          order = tab_order;
+        }
+        function updateSelectTabView(selection,parent,element,user){ 
+          //console.log(element.dataset.location.split(","));
+          //console.log(selection,parent);
+          //const order = $(element).index();
+          const aria_labelledby_id = element.parentElement.parentElement.parentElement.getAttribute("aria-labelledby");
+          const panel_id = element.parentElement.parentElement.parentElement.id;
+          
+          
+          if(child!=""){
+            if(typeof parent === 'string'){
+              child = JSON.parse(parent)[selection];
+              tree = JSON.parse(parent);
+              type = [];
+            }
+            else if(order > $("#"+aria_labelledby_id).index()){
+              const list = element.dataset.location.split(",");
+              type = Object.values(Object.assign({},list));
+              let res = Object.assign({}, tree);
+              while(list.length>0){
+                res = res[list.shift()];
+              }
+              child = res;
+              console.log(type);
+            }
+            else{
+              child = parent[selection];
+            }  
+
+            updatePills(aria_labelledby_id,panel_id);
+            $(element).addClass("active not-editable");
+            $(element).nextAll().removeClass("active not-editable");
+            $(element).prevAll().removeClass("active not-editable");
+            
+            $('.tab-title').removeClass('active');
+            if(child!=""){
+              // type of the post
+              type.push(selection);
+              // add options if exists
+              order++;
+              $('.tab-pane-internal').removeClass("show active");
+              const pill = `<a class="tab-title active" id="pill-${order}" data-bs-toggle="pill" role="tab" href="#pill-content-${order}" 
+                            aria-controls="pills-content-${order}" aria-selected="true"><i class="lni lni-vector"></i>${selection}</a>`;
+              
+              const pill_content = `<div class="tab-pane-internal active show fade" id="pill-content-${order}" role="tabpanel"
+                                        aria-labelledby="pill-${order}">
+                                        <div class="tab-text">
+                                            <ul class="list-group" id="list-${order}">
+                                            </ul>
+                                        </div>
+                                      </div>`;                      
+              $("#pills-div").append(pill);
+              $("#pills-content-div").append(pill_content);
+              let temp = Object.assign(type); 
+              Object.keys(child).forEach(key =>{
+                temp.push(key);
+                const li = `<li class="list-group-item btn btn-primary" aria-current="true" onclick="updateSelectTabView('${key}',child,this)" id="${key}" data-location='${temp}'>${key}</li>`;
+                $("#list-"+(order)).append(li);
+                temp.pop();
+              });
+            }
+            else {
+              type.push(selection);
+              $("#"+aria_labelledby_id).addClass("not-editable");   
+              $("#"+aria_labelledby_id).prevAll().addClass("not-editable");   
+              $(element).nextAll().addClass("not-editable");
+              $(element).prevAll().addClass("not-editable");
+              showContentTab();
+            }
+          }
+          else {
+            $('#failed').removeAttr('hidden');
+            setTimeout(() => {
+                $('#failed').attr('hidden', true);
+              }, 1000);
+          }
+        }   
+
+        $( document ).ready(function() {
+
+          var length = $(".tab-pane").length-1;
+          
+          $("#prev").addClass("disabled");
+          $("#next").addClass("disabled");
+          $("#submit").addClass("disabled");
+
+          $(".tab-pane").not(".tab-pane:nth-of-type(1)").hide();
+          $(".tab-pane").not(".tab-pane:nth-of-type(1)").css('transform','translateX(100px)');
+
+          $(".btn").click(function () {
+
+          var id = $(this).attr("id");
+
+          if (id == "next") {
+            if(child_tab === 2){
+              if(!validateAndPreviewPost())
+                return;
+            }
+            $("#prev").removeClass("disabled");
+            if (child_tab == length-1) {
+              $(this).addClass("disabled");
+              $('#submit').removeClass("disabled");
+              $('#prev').removeClass("disabled");
+            }
+            if (child_tab > length-1) {
+              $(this).addClass("disabled");
+              $('#submit').addClass("disabled");
+              $('#prev').addClass("disabled");
+            }
+            if (child_tab <= length) {
+              $(".circle:nth(" + child_tab + ")").addClass("active");
+              $(`.process-model li:nth( ${child_tab-1})`).addClass("visited");
+              child_tab++;
+            }
+          } else if (id == "prev") {
+            $("#next").removeClass("disabled");
+            $('#submit').addClass("disabled");
+            if (child_tab <= 2) {
+              $(this).addClass("disabled");
+            }
+            if (child_tab > 1) {
+              child_tab--;
+              $(".circle:nth(" + child_tab + ")").removeClass("active");
+              $(`.process-model li:nth( ${child_tab-1})`).removeClass("visited");
+            }
+          }
+          showTab();
+        });
+        $('#lightSlider').lightSlider({
+          gallery: true,
+          item: 1,
+          loop: true,
+          slideMargin: 0,
+          thumbItem: 9
+        }); 
+      });
+      function showTab(){
+        var currentSection = $(".tab-pane:nth-of-type(" + child_tab + ")");
+          currentSection.fadeIn();
+          currentSection.css('transform','translateX(0)');
+          currentSection.prevAll('.tab-pane').css('transform','translateX(-100px)');
+          currentSection.nextAll('.tab-pane').css('transform','translateX(100px)');
+          $('.tab-pane').not(currentSection).hide();
+      }
+      function showContentTab(){
+        //console.log(type);
+        url = "/api/posts/getObjectTemplate";
+        $.ajax({
+          type: "POST",
+          cache: false,
+          async: false,
+          contentType: 'application/json; charset=utf-8',
+          Accept: "application/json charset=utf-8",
+          url: url,
+          data : JSON.stringify({type:type}), 
+          success: function (response,status) {
+            respond = response;
+            if(status=="success"){
+              $('#success').removeAttr('hidden');
+              setTimeout(() => {
+                $('#success').attr('hidden', true);
+              }, 1000);
+              $("#next").removeClass("disabled");
+              //console.log(response); 
+              
+              $('#content-div').append(response);
+              
+              const text_input=(s) =>`<div class="row">
+                            <div class="col-md-6 m-2">
+                              <label class="labels">${s}</label>
+                              <input type="text" class="form-control" id="des-attr-${s}">
+                            </div>
+                          </div>`;
+              const number_input= (s) =>`<div class="row">
+                            <div class="col-md-6 m-2">
+                              <label class="labels">${s}</label>
+                              <input type="number" class="form-control" id="des-attr-${s}">
+                            </div>
+                          </div>`;
+              const checkbox_input=(s) =>`<div class="row">
+                            <div class="col-md-6 m-2">
+                              <input class="form-check-input" type="checkbox" value="false" id="des-attr-${s}">
+                              <label class="form-check-label" for="des-attr-${s}">${s}</label>
+                            </div>
+                          </div>`;
+              Object.keys(response).forEach((key) =>{
+                //console.log(key,response[key]);
+                if(response[key]==="String"){
+                  $('#content-div').append(text_input(key));
+                }else if(response[key]===1970){
+                  $('#content-div').append(number_input(key));
+                }else if(response[key]===false){
+                  $('#content-div').append(checkbox_input(key));
+                }
+              })
+            }
+            else{
+              $('#failed').removeAttr('hidden');
+              setTimeout(() => {
+                $('#failed').attr('hidden', true);
+              }, 1000);
+            }
+          },
+          error: function (e) {
+            console.log(e);
+            $('#failed').removeAttr('hidden');
+              setTimeout(() => {
+                $('#failed').attr('hidden', true);
+              }, 1000);
+          }
+        });
+      }
+      function validateAndPreviewPost(){
+        // add validation here
+        if(!false){
+          getPostData();
+          $('#preview-thumb').attr('data-thumb','http://www.gergitavan.com/wp-content/uploads/2017/07/default-placeholder-1024x1024-570x321.png');
+          $('#preview-img').attr('src','http://www.gergitavan.com/wp-content/uploads/2017/07/default-placeholder-1024x1024-570x321.png');
+          $('#preview-title').html(post.title);
+          $('#preview-price').html(post.price).append(' TL');
+                
+          const lab = (key)=>`<label class="label primary-label rounded-full">
+                            ${key}
+                          </label> `;
+          const des_attr = (key,value)=>`<span><strong>${key} :</strong> </span>
+                            <span>${value}</span>
+                            <br>`;
+          $('#preview-type').empty();
+          type.forEach((key)=>{
+              $('#preview-type').append(lab(key));
+            }); 
+          $('#preview-description').empty();           
+          Object.keys(post.description).forEach((key)=>{
+            $('#preview-description').append(des_attr(key,post.description[key]));
+          });               
+          return true;
+        }
+        return false;
+      }
+      function createPost(){
+        if(false){
+          $('#create-post-failed').removeAttr('hidden');
+        }
+        getPostData();
+        let url = "/api/posts/";
+        let res=false;
+        $.ajax({
+          type: "POST",
+          cache: false,
+          async: false,
+          contentType: 'application/json; charset=utf-8',
+          Accept: "application/json charset=utf-8",
+          url: url,
+          data : JSON.stringify(post), 
+          success: function (response,status) {
+            console.log(response);
+            if(status=="success"){
+              res = true;
+            }
+            else{
+              $('#creat-post-failed').removeAttr('hidden');
+            }
+          },
+          error: function (e) {
+            console.log(e);
+            $('#failed').removeAttr('hidden');
+          }
+        });
+        return res;
+      }
+      function getPostData(){
+        var data = {};
+        data['type'] = type;
+        data['title'] = $('#title').val();
+        data['price'] = parseInt($('#price').val());
+        data.image = "http://www.gergitavan.com/wp-content/uploads/2017/07/default-placeholder-1024x1024-570x321.png";
+        data.description = {};
+        Object.keys(respond).forEach((key) =>{
+                if(respond[key] === "String"){
+                  data.description[key] = $('#des-attr-'+key).val();
+                }else if(respond[key] === 1970){
+                  data.description[key] = new Date($('#des-attr-'+key).val()).getFullYear();
+                }else if(respond[key] === false){
+                  data.description[key] = $('#des-attr-'+key).is(':checked');
+                }
+              })
+        post = data;
+      }
+    function showApprovalTab(){
+      if(createPost()){
+        $('#approval-tab').removeAttr('hidden');
+        $(".circle:nth(" + child_tab + ")").addClass("active");
+        $(`.process-model li:nth( ${child_tab-1})`).addClass("visited");
+        child_tab++;
+        $('#next').addClass("disabled");
+        $('#submit').addClass("disabled");
+        $('#prev').addClass("disabled");
+        showTab();
+      }
+      else{
+        $('#create-post-failed').removeAttr('hidden');
+          setTimeout(() => {
+            $('#create-post-failed').attr('hidden', true);
+          }, 3000);
+      }
+    }
+    </script>
+  </body>
+</html>
