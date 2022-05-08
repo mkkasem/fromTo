@@ -5,6 +5,7 @@ const router = express.Router();
 const postController = require('../controllers/post');
 
 const isAuthenticated = require('../middlewares/isAuth');
+const onlyAdmin = require('../middlewares/onlyAdmin');
 
 router.get('/addPost', postController.getAddPostPage);
 
@@ -17,6 +18,9 @@ router.post(
 );
 
 router.post('/', isAuthenticated, postController.addNewPost);
+
+router.get('/pendingPosts', onlyAdmin, postController.getPendingPosts);
+router.put('/setPostStatus/:id', onlyAdmin, postController.setPostStatus);
 
 router.put('/:id', isAuthenticated, postController.updatePost);
 

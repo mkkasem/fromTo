@@ -144,7 +144,10 @@ module.exports = {
     try {
       const post = await Post.findById(id);
       const comment = post.comments.find((c) => c.id === commentid);
-      if (id && req.user._id === comment.creator.toString()) {
+      if (
+        id &&
+        (req.user._id === comment.creator.toString() || req.user.isAdmin)
+      ) {
         const indexOfComment = post.comments.indexOf(comment);
         post.comments.splice(indexOfComment, 1);
         await post.save();
@@ -255,6 +258,26 @@ module.exports = {
         $or: [{ title: { $regex: regEx } }, { type: { $regex: regEx } }],
       };
       filterPosts(res, query);
+    }
+  },
+  getPendingPosts: async (req, res) => {
+    const posts = await Post.find({ status: 'pending' });
+    res.render('pendingPosts', { user: req.user, loggedIn: true, posts });
+  },
+  setPostStatus: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      const post = await Post.findById(id);
+      if (status === 'rejected') {
+        await Post.findByIdAndDelete(id);
+        return res.redirect('/api/posts/pendingPosts');
+      }
+      post.status = status;
+      await post.save();
+      return res.redirect(303, `/api/posts/${id}`);
+    } catch (error) {
+      return res.redirect('/');
     }
   },
 };

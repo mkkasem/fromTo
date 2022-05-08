@@ -31,6 +31,11 @@ const postSchema = new Schema(
       type: Object,
       required: [true, 'Description is required'],
     },
+    status: {
+      type: String,
+      default: 'pending',
+      enum: ['pending', 'approved', 'rejected'],
+    },
     isSold: {
       type: Boolean,
       default: false,
