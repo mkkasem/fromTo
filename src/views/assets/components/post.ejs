@@ -361,8 +361,6 @@ a{
   <body>
     <%- include("navbar");-%> 
     <div class="container">
-       
-        <%console.log(post?.status) %>
         <%if(post.status==="pending" && user.isAdmin){ %>
             <div class="alert alert-warning text-center">
                 <strong>Warning!</strong> This post is waiting for approval.

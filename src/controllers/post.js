@@ -270,7 +270,7 @@ module.exports = {
       const post = await Post.findById(id);
       if (status === 'rejected') {
         await Post.findByIdAndDelete(id);
-        return res.redirect('/');
+        return res.redirect('/api/posts/pendingPosts');
       }
       post.status = status;
       await post.save();
