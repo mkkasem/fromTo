@@ -374,6 +374,26 @@ h6 {
 .active {
     display: block;
 }
+
+.baseBlock {
+	margin: 0px 0px 35px 0px;
+	border-radius: 5px;
+	overflow: hidden;
+	background: #fff;
+	-moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.baseBlock:hover {
+	-webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
+
     </style>
   </head>
 
@@ -411,7 +431,7 @@ h6 {
                 <div id="description-filter">
 
                 </div>
-                <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter" onclick="filterPosts()">Filter<span class="fa fa-filter pl-1"></span></button>
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter " onclick="filterPosts()">Filter<span class="fa fa-filter pl-1"></span></button>
             </section>
         
             <section id="products">
@@ -420,7 +440,7 @@ h6 {
                         <%if(locals.posts){ posts.forEach((post)=>{%>
                         <a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2" href="api/posts/<%=post.id%>">
                             <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( <%=post.id.toString()%>" > -->
-                                <div class="card w-100" style="cursor: pointer;" > <img class="card-img-top" src="<%=post.image%>">
+                                <div class="card w-100 baseBlock" style="cursor: pointer;" > <img class="card-img-top" src="<%=post.image%>">
                                     <div class="card-body Regular shadow ">
                                         <h5><b><%=post.title%></b> </h5>
                                         <div class="d-flex flex-row my-2">

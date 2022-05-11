@@ -10,6 +10,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css	">
     <title>Document</title>
 </head>
+
+<style>
+    .baseBlock {
+        margin: 0px 0px 35px 0px;
+        border-radius: 5px;
+        overflow: hidden;
+        background: #fff;
+        -moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        -o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .baseBlock:hover {
+        -webkit-transform: translate(0, -8px);
+        -moz-transform: translate(0, -8px);
+        -ms-transform: translate(0, -8px);
+        -o-transform: translate(0, -8px);
+        transform: translate(0, -8px);
+        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+</style>
 <body>
     <%- include("navbar");-%> 
     
@@ -19,6 +41,7 @@
                 <div class="col-6">
                     <h3 class="mb-3">Pending Posts</h3>
                 </div>
+                <%if(posts.length>3){%>
                 <div class="col-6 text-right">
                     <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
                         <i class="fa fa-arrow-left"></i>
@@ -27,6 +50,7 @@
                         <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
+                <%}%>
                 <div class="col-12">
                     <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
@@ -38,7 +62,7 @@
 
                                                     <div class="col-md-4 mb-3">
                                                         <a href="/api/posts/<%=posts[i].id%>">
-                                                            <div class="card" style=" height: 400px;">
+                                                            <div class="card baseBlock" style=" height: 400px;">
                                                                 <img class="img-fluid h-75" alt="100%x280" src="<%=posts[i].image%>"  >
                                                                 <div class="card-body h-25 overflow-hidden">
                                                                     <h4 class="card-title"><%=posts[i].title%></h4>
@@ -59,7 +83,7 @@
                                                 <% for(let i=0 ; i<3 ; i++){ %>
                                                     <div class="col-md-4 mb-3">
                                                         <a href="/api/posts/<%=posts[i].id%>">
-                                                            <div class="card" style=" height: 400px;">
+                                                            <div class="card baseBlock" style=" height: 400px;">
                                                                 <img class="img-fluid h-75" alt="100%x280" src="<%=posts[i].image%>"  >
                                                                 <div class="card-body h-25 overflow-hidden">
                                                                     <h4 class="card-title"><%=posts[i].title%></h4>
@@ -83,7 +107,7 @@
                                                         <%if(i<posts.length){ %>
                                                             <div class="col-md-4 mb-3">
                                                                 <a href="/api/posts/<%=posts[i].id%>">
-                                                                    <div class="card" style=" height: 400px;">
+                                                                    <div class="card baseBlock" style=" height: 400px;">
                                                                         <img class="img-fluid h-75" alt="100%x280" src="<%=posts[i].image%>"  >
                                                                         <div class="card-body h-25 overflow-hidden">
                                                                             <h4 class="card-title"><%=posts[i].title%></h4>
