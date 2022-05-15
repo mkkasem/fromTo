@@ -4,6 +4,11 @@ class Land {
   space;
 
   constructor(obj) {
+    if (!obj) {
+      this.adress = 'String';
+      this.space = new Date('1970').getFullYear();
+      return;
+    }
     if (!obj || !obj.adress || !obj.space)
       throw new Error('Land description validation error');
     this.adress = obj.adress;

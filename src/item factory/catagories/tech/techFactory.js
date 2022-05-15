@@ -1,19 +1,21 @@
-const forRent = require('./forRentFactory');
-const forSale = require('./forSaleFactory');
+const Computer = require('./computer');
+const Mobile = require('./mobile');
+const TV = require('./tv');
 
 // error messages
 const generalError = 'invalid real estate type';
 
 module.exports = (typeSequence, obj) => {
   const type = typeSequence[0].toString();
-  const newTypeSequence = typeSequence.splice(1);
   // eslint-disable-next-line no-useless-catch
   try {
     switch (type) {
-      case 'for rent':
-        return forRent(newTypeSequence, obj);
-      case 'for sale':
-        return forSale(newTypeSequence, obj);
+      case 'computer':
+        return new Computer(obj);
+      case 'mobile':
+        return new Mobile(obj);
+      case 'tv':
+        return new TV(obj);
       default:
         break;
     }

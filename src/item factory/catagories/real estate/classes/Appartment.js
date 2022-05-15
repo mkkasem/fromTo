@@ -1,4 +1,4 @@
-class House {
+class Appartment {
   adress;
 
   floor;
@@ -10,6 +10,14 @@ class House {
   buildingAge;
 
   constructor(obj) {
+    if (!obj) {
+      this.adress = 'String';
+      this.floor = new Date('1970').getFullYear();
+      this.room = new Date('1970').getFullYear();
+      this.space = new Date('1970').getFullYear();
+      this.buildingAge = new Date('1970').getFullYear();
+      return;
+    }
     if (
       !obj ||
       !obj.adress ||
@@ -27,4 +35,4 @@ class House {
   }
 }
 
-module.exports = House;
+module.exports = Appartment;

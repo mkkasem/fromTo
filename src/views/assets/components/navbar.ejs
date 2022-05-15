@@ -474,58 +474,11 @@
                 <span class="toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse sub-menu-bar " id="navbarOne" style=" background-color: #444444;">
-                <ul class="navbar-nav m-auto ">
-                  <!-- <li class="nav-item">
-                    <a
-                      class="page-scroll active"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#sub-nav1"
-                      aria-controls="sub-nav1"
-                      aria-expanded="false"
-                      aria-label="Toggle navigation"
-                      href="javascript:void(0)"
-                    >
-                      About
-                      <div class="sub-nav-toggler">
-                        <span><i class="lni lni-chevron-down"></i></span>
-                      </div>
-                    </a>
-                    <ul class="sub-menu collapse" id="sub-nav1">
-                      <li><a href="javascript:void(0)">About Us</a></li>
-                      <li>
-                        <a
-                          class="page-scroll"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#sub-nav2"
-                          aria-controls="sub-nav2"
-                          aria-expanded="false"
-                          aria-label="Toggle navigation"
-                          href="javascript:void(0)"
-                        >
-                          Our Portfolio
-                          <div class="sub-nav-toggler">
-                            <span><i class="lni lni-chevron-down"></i></span>
-                          </div>
-                        </a>
-                        <ul class="sub-menu collapse" id="sub-nav2">
-                          <li>
-                            <a href="javascript:void(0)">Portfolio Style 1</a>
-                          </li>
-                          <li>
-                            <a href="javascript:void(0)">Portfolio Style 2</a>
-                          </li>
-                          <li>
-                            <a href="javascript:void(0)">Portfolio Style 3</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a href="javascript:void(0)">Our Teams</a></li>
-                    </ul>
-                  </li> -->   
+                <ul class="navbar-nav m-auto "> 
                   <li class="nav-item">
                     <a href="/">Home</a>
                   </li>
-                  <% if(user?.isAdmin){ %>
+                  <% if(locals.user && user?.isAdmin){ %>
                     <li class="nav-item">
                       <a href="/api/posts/pendingPosts">pending posts</a>
                     </li>

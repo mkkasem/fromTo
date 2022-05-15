@@ -1,21 +1,29 @@
 {
   "catagories": {
-    "real estate": { "house": "", "land": "" },
+    "real estate": {
+      "for rent": {
+        "house": "",
+        "apartment": "",
+        "office": "",
+        "land": ""
+      },
+      "for sale": {
+        "house": "",
+        "apartment": "",
+        "office": "",
+        "land": ""
+      }
+    },
     "vehicle": {
       "car": "",
-      "van": {
-        "tusan": {
-          "2021": "",
-          "2022": ""
-        },
-        "toyota": "",
-        "honda": "",
-        "nissan": "",
-        "mitsubishi": "",
-        "truck": "",
-        "sozuki": "",
-        "maruti": ""
-      }
+      "motorcycle": "",
+      "van": "",
+      "bicycle": ""
+    },
+    "tech": {
+      "computer": "",
+      "mobile": "",
+      "tv": ""
     }
   }
 }

@@ -117,6 +117,7 @@ const getResetPassword = async (req, res) => {
       error: [],
       id,
       token,
+      user,
     });
   } catch (error) {
     return res.send('<h1>Invalid Link<h1/>');

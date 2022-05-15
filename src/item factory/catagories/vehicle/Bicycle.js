@@ -1,11 +1,7 @@
-class Van {
+class Bicycle {
   brand;
 
   color;
-
-  model;
-
-  modelYear;
 
   new;
 
@@ -13,19 +9,15 @@ class Van {
     if (!obj) {
       this.brand = 'String';
       this.color = 'String';
-      this.model = 'String';
-      this.modelYear = new Date('1970').getFullYear();
       this.new = false;
       return;
     }
     if (!obj || !obj.brand || !obj.color || !obj.model || !obj.modelYear)
-      throw new Error('Van description validation error');
+      throw new Error('Bicycle description validation error');
     this.brand = obj.brand;
     this.color = obj.color;
-    this.model = obj.model;
-    this.modelYear = obj.modelYear;
     this.new = obj.new;
   }
 }
 
-module.exports = Van;
+module.exports = Bicycle;

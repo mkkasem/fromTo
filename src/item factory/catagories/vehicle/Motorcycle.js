@@ -1,4 +1,4 @@
-class Van {
+class Motorcycle {
   brand;
 
   color;
@@ -19,7 +19,7 @@ class Van {
       return;
     }
     if (!obj || !obj.brand || !obj.color || !obj.model || !obj.modelYear)
-      throw new Error('Van description validation error');
+      throw new Error('Motorcycle description validation error');
     this.brand = obj.brand;
     this.color = obj.color;
     this.model = obj.model;
@@ -28,4 +28,4 @@ class Van {
   }
 }
 
-module.exports = Van;
+module.exports = Motorcycle;
