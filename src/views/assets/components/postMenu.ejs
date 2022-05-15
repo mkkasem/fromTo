@@ -555,10 +555,12 @@ h6 {
             if(type[0] === "catagories"){
                 type.shift();
             }
+            console.log(type.length);
+            
             if(type.length>0){
-                url += "type="+type.toString().replace(",","-");
+                url += "type="+type.toString().replaceAll(",","-");
             }
-
+            console.log(url);
             if(min_price !== "" && min_price >= 0){ 
                 url += "&min_price="+min_price;
             }
@@ -595,7 +597,7 @@ h6 {
 
                     const _post =(post)=> `<a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2" href="api/posts/${post._id}">
                             <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( ${post._id.toString()}" > -->
-                                <div class="card w-100" style="cursor: pointer;" > <img class="card-img-top" src="${post.image}">
+                                <div class="card w-100 baseBlock" style="cursor: pointer;" > <img class="card-img-top" src="${post.image}">
                                     <div class="card-body Regular shadow ">
                                         <h5><b>${post.title}</b> </h5>
                                         <div class="d-flex flex-row my-2">

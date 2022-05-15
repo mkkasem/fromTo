@@ -281,7 +281,7 @@
                 </div>
                   <div role="tabpanel" class="tab-pane" id="content">
                     <!-- content form -->
-                    <div id="content-div" class="design-process-content">
+                    <div class="design-process-content">
                       <h3 class="semi-bold">Post Content</h3>
                       <div class="pt-0">
                         <div class="row mt-2">
@@ -293,12 +293,26 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                               <strong><label class="labels">Price:</label></strong>
-                              <strong><label class="labels"> TL</label></strong>
+                              <strong><label class="labels"> $</label></strong>
                               <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="price">
                             </div>
                         </div>
                         <hr class="d-flex justify-content-center">
-                        <h5 class="labels">Description:</h5>
+                        <div class="row">
+                          <div class="col-6 col-md-6">
+                            <h5 class="labels">Description:</h5>
+                            <div id="content-div">
+                            </div>
+                          </div>
+                          <div class="col-6 col-md-6 d-flex justify-content-center">
+                            <form id="post-image-form" enctype="multipart/form-data">
+                              <div class="form-group d-flex justify-content-center" style="margin:15% 5px 0px 30%;">
+                                <label for="image">Image:</label>
+                                <input type="file" class="form-control-file" id="post-image-input" name="image">
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>    
                     </div>
                     <!-- end content form --> 
@@ -312,12 +326,11 @@
                         <div class="row no-gutters">
                             <div class="col-md-5 pr-2">
                                 <div class="card">
-                                    <div class="demo" >
-                                        <ul id="lightSlider" >
-                                            <li data-thumb="" id="preview-thumb">
-                                                <img src="" id="preview-img"/>
+                                    <div class="demo w-100" >
+                                        <ul id="lightSlider">
+                                            <li data-thumb="http://www.onlylondon.properties/application/modules/themes/views/default/assets/images/image-placeholder.png" id="preview-thumb">
+                                                <img src="http://www.onlylondon.properties/application/modules/themes/views/default/assets/images/image-placeholder.png" id="preview-img"/>
                                             </li>
-                                           
                                         </ul>
                                     </div>
                                 </div>
@@ -386,7 +399,7 @@
                 </div>
                 <div class="text-end p-3">
                   <button  id="prev" class="btn primary-btn-outline disabled">
-                      previews
+                      previous
                     </button>
                     <span>
                       <button  id="next" class="btn icon-left primary-btn">
@@ -590,19 +603,19 @@
               $('#content-div').append(response);
               
               const text_input=(s) =>`<div class="row">
-                            <div class="col-md-6 m-2">
+                            <div class="col-md-12 m-2">
                               <label class="labels">${s}</label>
                               <input type="text" class="form-control" id="des-attr-${s}">
                             </div>
                           </div>`;
               const number_input= (s) =>`<div class="row">
-                            <div class="col-md-6 m-2">
+                            <div class="col-md-12 m-2">
                               <label class="labels">${s}</label>
                               <input type="number" class="form-control" id="des-attr-${s}">
                             </div>
                           </div>`;
               const checkbox_input=(s) =>`<div class="row">
-                            <div class="col-md-6 m-2">
+                            <div class="col-md-12 m-2">
                               <input class="form-check-input" type="checkbox" value="false" id="des-attr-${s}">
                               <label class="form-check-label" for="des-attr-${s}">${s}</label>
                             </div>
@@ -634,14 +647,28 @@
           }
         });
       }
+      $("#post-image-input").change(function(){
+        readURL(this);
+      });
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              $('#preview-thumb').attr('data-thumb',e.target.result);
+              $('#preview-img').attr('src',e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+      }
       function validateAndPreviewPost(){
         // add validation here
         if(!false){
           getPostData();
-          $('#preview-thumb').attr('data-thumb','http://www.gergitavan.com/wp-content/uploads/2017/07/default-placeholder-1024x1024-570x321.png');
-          $('#preview-img').attr('src','http://www.gergitavan.com/wp-content/uploads/2017/07/default-placeholder-1024x1024-570x321.png');
+
           $('#preview-title').html(post.title);
-          $('#preview-price').html(post.price).append(' TL');
+          $('#preview-price').html(post.price).append(' $');
                 
           const lab = (key)=>`<label class="label primary-label rounded-full">
                             ${key}
@@ -666,16 +693,24 @@
           $('#create-post-failed').removeAttr('hidden');
         }
         getPostData();
+        const payload = new FormData();
+        payload.append('title',post.title);
+        payload.append('price',post.price);
+        payload.append('type',post.type);
+        payload.append('description',JSON.stringify(post.description));
+        payload.append('image',post.image);
         let url = "/api/posts/";
         let res=false;
         $.ajax({
           type: "POST",
           cache: false,
           async: false,
-          contentType: 'application/json; charset=utf-8',
-          Accept: "application/json charset=utf-8",
+          enctype: 'multipart/form-data',
+          processData: false,
+          contentType: false,
           url: url,
-          data : JSON.stringify(post), 
+          data : payload, 
+          dataType: 'json',
           success: function (response,status) {
             console.log(response);
             if(status=="success"){
@@ -693,11 +728,12 @@
         return res;
       }
       function getPostData(){
-        var data = {};
+         var data = {};
         data['type'] = type;
         data['title'] = $('#title').val();
         data['price'] = parseInt($('#price').val());
-        data.image = "http://www.gergitavan.com/wp-content/uploads/2017/07/default-placeholder-1024x1024-570x321.png";
+        data.image = document.getElementById('post-image-form')[0].files[0];
+        //console.log(document.getElementById('post-image-form')[0].files[0])
         data.description = {};
         Object.keys(respond).forEach((key) =>{
                 if(respond[key] === "String"){

@@ -10,9 +10,9 @@ class House {
   constructor(obj) {
     if (!obj) {
       this.adress = 'String';
-      this.room = new Date('1970').getFullYear();
-      this.space = new Date('1970').getFullYear();
-      this.buildingAge = new Date('1970').getFullYear();
+      this.room = 'String';
+      this.space = 'String';
+      this.buildingAge = 'String';
       return;
     }
     if (!obj || !obj.adress || !obj.room || !obj.space || !obj.buildingAge)

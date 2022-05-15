@@ -6,7 +6,7 @@ class Land {
   constructor(obj) {
     if (!obj) {
       this.adress = 'String';
-      this.space = new Date('1970').getFullYear();
+      this.space = 'String';
       return;
     }
     if (!obj || !obj.adress || !obj.space)

@@ -12,10 +12,10 @@ class Appartment {
   constructor(obj) {
     if (!obj) {
       this.adress = 'String';
-      this.floor = new Date('1970').getFullYear();
-      this.room = new Date('1970').getFullYear();
-      this.space = new Date('1970').getFullYear();
-      this.buildingAge = new Date('1970').getFullYear();
+      this.floor = 'String';
+      this.room = 'String';
+      this.space = 'String';
+      this.buildingAge = 'String';
       return;
     }
     if (

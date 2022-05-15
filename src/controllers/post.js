@@ -194,13 +194,23 @@ module.exports = {
   },
   addNewPost: async (req, res) => {
     try {
+      const { image } = req.files;
+
       req.post = new Post();
+
+      const urlImage = `/posts/${req.post.id}.${image.mimetype.split('/')[1]}`;
+      req.body.image = urlImage;
+
+      await image.mv(
+        `${__dirname}/../images/posts/${req.post.id}.${
+          image.mimetype.split('/')[1]
+        }`
+      );
+      req.body.description = JSON.parse(req.body.description);
+      req.body.price = parseFloat(req.body.price);
+      req.body.type = req.body.type.split(',');
       const newPost = await savePost(req);
-      /*
-    To add post the user needs to be registered(onlyAtuhenticated middleware check that)
-    All necessary validations are handled by quesion model
-    so we can save new post directly
-    */
+
       const postData = req.body;
       // Assign the new post to the current user
       postData.user = req.user.id;
@@ -231,6 +241,7 @@ module.exports = {
           { type: { $all: typeSecuence } },
           { price: { $gte: min_price || 0 } },
           { price: { $lte: max_price || Infinity } },
+          { status: 'approved' },
         ],
       };
       // extract filter properties and add them to the query

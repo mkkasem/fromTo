@@ -8,8 +8,8 @@ class Office {
   constructor(obj) {
     if (!obj) {
       this.adress = 'String';
-      this.floor = new Date('1970').getFullYear();
-      this.space = new Date('1970').getFullYear();
+      this.floor = 'String';
+      this.space = 'String';
       return;
     }
     if (!obj || !obj.adress || !obj.floor || !obj.space)

@@ -12,7 +12,7 @@ class Computer {
       this.hard_disk = 'String';
       this.RAM = 'String';
       this.proccessor = 'String';
-      this.Grphica_card = 'String';
+      this.Grphical_card = 'String';
       return;
     }
     if (
