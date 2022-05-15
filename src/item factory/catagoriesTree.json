@@ -1,6 +1,29 @@
 {
-  "catagories": [
-    { "real estate": ["house", "land"] },
-    { "vehicle": ["car", "van"] }
-  ]
+  "catagories": {
+    "real estate": {
+      "for rent": {
+        "house": "",
+        "apartment": "",
+        "office": "",
+        "land": ""
+      },
+      "for sale": {
+        "house": "",
+        "apartment": "",
+        "office": "",
+        "land": ""
+      }
+    },
+    "vehicle": {
+      "car": "",
+      "motorcycle": "",
+      "van": "",
+      "bicycle": ""
+    },
+    "tech": {
+      "computer": "",
+      "mobile": "",
+      "tv": ""
+    }
+  }
 }

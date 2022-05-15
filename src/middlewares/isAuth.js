@@ -12,8 +12,6 @@ module.exports = (req, res, next) => {
   } catch (error) {
     // delete the token when it is invalid
     res.clearCookie('token');
-    return res.status(401).json({
-      message: 'You are not authenticated',
-    });
+    return res.redirect('/signin');
   }
 };

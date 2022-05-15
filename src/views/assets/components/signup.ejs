@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--====== Title ======-->
+    <title>Sign Up</title>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.svg"
+      type="image/svg"
+    />
+
+    <!--====== Bootstrap css ======-->
+<!-- CSS only -->
+
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="/css/lineicons.css" />
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="/scss/starter.css" />
+
+
+
+  </head>
+
+  <body style="background-color: #eee;">
+    <!--====== SIGNIN ONE PART START ======-->
+   
+    <section class="vh-100" >
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-lg-12 col-xl-11">
+            <div class="card text-black" style="border-radius: 25px;">
+              <div class="card-body p-md-5">
+                <div class="row justify-content-center">
+                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+    
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+    
+                    <form class="mx-1 mx-md-4" action="/api/auth/signup" method="post" enctype="multipart/form-data">
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" name="username"  class="form-control" />
+                          <label class="form-label" for="form3Example1c">Your Username</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" name="firstName"  class="form-control" />
+                          <label class="form-label" for="form3Example1c">Your First Name</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" name="lastName"  class="form-control" />
+                          <label class="form-label" for="form3Example1c">Your Last Name</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" name="phone"  class="form-control" />
+                          <label class="form-label" for="form3Example1c">Your Phone</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="email" name="email"  class="form-control" />
+                          <label class="form-label" for="form3Example3c">Your Email</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" name="password"  class="form-control" />
+                          <label class="form-label" for="form3Example4c">Password</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" name="passwordConfirm" class="form-control" />
+                          <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        </div>
+                      </div>
+                      
+                      <div class="form-floating text-center mb-3"  >
+                        <input type="file"  id="floatingInputAvatar" name="avatar" placeholder="myavatar" style="display:none;">
+                        <div class="d-block align-items-center">
+                            <img id="profileImage"   src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                            class="rounded-circle  z-depth-1-half avatar-pic" alt="example placeholder avatar"
+                            style="max-height: 100px; max-width: 100px;"> 
+                        </div>
+                        press to choose avatar 
+                      </div>
+
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                      </div>
+                      
+                     
+                    </form>
+    
+                  </div>
+
+                  
+                  <div class="container col-md-10 col-lg-6 col-xl-7 d-block order-1 order-lg-2">
+                    <br><br><br><br><br>
+                    
+                    <%if(locals.errors){%>
+                      <div class="row text-center  d-flex ">
+                        <% locals.errors.forEach(function(error){ %>
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong><%=error%> </strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>    
+                          </div>
+                        <% }) %>
+                      </div>
+                    <%}%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+
+<script>
+  $('#profileImage').click((e) => {
+  $('#floatingInputAvatar').click();
+});
+
+function fasterPreview(uploader) {
+  
+  if (uploader.files && uploader.files[0]) {
+    $('#profileImage').attr(
+      'src',
+      // eslint-disable-next-line node/no-unsupported-features/node-builtins
+      window.URL.createObjectURL(uploader.files[0])
+    );
+    $('#profileImage').attr('style', 'height: 100px; width: 100px;');
+  }
+}
+function encodeImageFileAsURL(element) {
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    // console.log('RESULT', reader.result)
+  }
+   reader.readAsDataURL(file);
+
+}
+
+$('#floatingInputAvatar').change(function () {
+  fasterPreview(this);
+  encodeImageFileAsURL(this)
+
+  
+});
+</script>
+  </body>
+</html>

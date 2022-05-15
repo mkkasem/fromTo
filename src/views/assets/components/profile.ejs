@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--====== Title ======-->
+    <title>title</title>
+
+    <!--====== Favicon Icon ======-->
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.svg"
+      type="image/svg"
+    />
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="/css/lineicons.css" />
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="/scss/starter.css" />
+
+    <link rel="stylesheet" href="/scss/footers/footer-01.css" />
+    <!--add style if exists-->
+    <style>
+      body {
+    background:var(--primary)
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+    </style>
+  </head>
+
+  <body>
+    <%- include("navbar");-%> 
+
+    <div class="container d-flex justify-content-center rounded bg-white mt-5 mb-5">
+            
+            <div class="col-md-8 border-right my-0">
+                <div class="d-flex justify-content-center  align-items-center">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div> 
+                <div class=" border-right">
+                    <div class="d-flex flex-column align-items-center text-center py-0  "><img class="rounded-circle mt-5"   src="<%=user.avatar%>" style="width:100px;height: 100px; max-width:150px !important ; max-height: 150px !important;"><span class="font-weight-bold"><%=user.firstName+" "+ user.lastName %></span><span class="text-black-50"><%=user.email%></span><span> </span></div>
+                </div>
+                <form class="p-3 py-5 pt-0" action="/api/users/<%=user._id%>?_method=PUT" method="post" enctype="multipart/form-data">
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels"><strong>Username</strong></label><input type="text " name="username" class="form-control" readonly value="<%=user.username%>"></div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" name="firstName" placeholder="first name" value="<%=user.firstName%>"></div>
+                        <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" name="lastName" placeholder="surname" value="<%=user.lastName%>" ></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" name="phone" placeholder="enter phone number" value="<%=user.phone?user.phone:''%>"></div>
+                        <%if(`${user.email.split('@')[0]}${'google' || 'facebook'}` === user.username){%>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" name="email" placeholder="enter Email" value="<%=user.email%>" readonly></div>
+                        <%}else{%>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" name="email" placeholder="enter Email" value="<%=user.email%>"></div>
+                        <%}%>
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                </form>
+            </div>
+    </div>
+  </body>
+</html>

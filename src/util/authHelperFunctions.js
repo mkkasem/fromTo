@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const isImageUrl = require('is-image-url');
-const User = require('../models/user');
 
 const buildPayload = (userData) => ({
   user: {
@@ -11,6 +9,8 @@ const buildPayload = (userData) => ({
     lastName: userData.lastName,
     isAdmin: userData.isAdmin,
     _id: userData._id.toString(),
+    phone: userData?.phone,
+    avatar: userData.avatar,
   },
 });
 /*
@@ -18,9 +18,12 @@ this function should be modified
 somethimg wrong with it 
 */
 // eslint-disable-next-line consistent-return
-const confirmPassword = async (user, password) => {
-  const validPassword = await bcrypt.compare(password, user.password_hash);
-  if (!validPassword) return new Error('Wrong password');
+const isCorrectPassword = async (user, password) => {
+  if (user) {
+    // eslint-disable-next-line no-return-await
+    return await bcrypt.compare(password, user.password_hash);
+  }
+  return false;
 };
 
 const createToken = (user, rememberMe, res) => {
@@ -38,35 +41,11 @@ const createToken = (user, rememberMe, res) => {
 
   res.cookie('token', token, {
     maxAge: cookieAge,
-    httpOnly: true,
+    httpOnly: false,
   });
 };
 
-const verifySignUpData = async (data) => {
-  const { username, email, password, passwordConfirm, phone, avatar } = data;
-
-  if (!isImageUrl(avatar)) {
-    throw new Error('Avatar must be a valid image url');
-  }
-  if (!password || !passwordConfirm) {
-    throw new Error('Password and Confirm password is required');
-  }
-  if (!phone) {
-    throw new Error('Phone is required');
-  }
-  if (await User.exists({ username })) {
-    throw new Error('Username already used');
-  }
-  if (await User.exists({ email })) {
-    throw new Error('Email already used');
-  }
-  if (password !== passwordConfirm) {
-    throw new Error('Passwords do not match');
-  }
-};
-
 module.exports = {
-  confirmPassword,
+  isCorrectPassword,
   createToken,
-  verifySignUpData,
 };

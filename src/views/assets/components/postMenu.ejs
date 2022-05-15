@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--====== Title ======-->
+    <title>title</title>
+
+    <!--====== Favicon Icon ======-->
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.svg"
+      type="image/svg"
+    />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <!--add style if exists-->
+    <style>
+      * {
+    box-sizing: border-box
+}
+
+#search {
+    outline: none;
+    border: none;
+    display: inline-block
+}
+
+#burgundy {
+    color: rgb(153, 40, 59)
+}
+
+#orange,
+select,
+.btn {
+    color: orange
+}
+
+.fa-search {
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 3px;
+    padding-right: 20px
+}
+
+.search-nav-item {
+    height: 40px
+}
+
+nav {
+    padding: 0px 100px
+}
+
+.fa-user-o,
+.fa-shopping-cart {
+    font-size: 20px;
+    padding: 4px
+}
+
+.form-group {
+    margin-bottom: 5px
+}
+
+label {
+    padding-left: 10px
+}
+
+.form-group:last-child {
+    margin-bottom: 0
+}
+
+h6 {
+    margin-bottom: 0px
+}
+
+#sort {
+    outline: none;
+    border: none
+}
+
+.btn {
+    border: 1px solid orange;
+    border-radius: 10px;
+    background-color: #fff
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: orange
+}
+
+.card-body {
+    padding: 8px
+}
+
+.sign {
+    width: 25px;
+    height: 25px
+}
+
+.discount {
+    border: 1px solid orange;
+    border-radius: 5px;
+    width: 65px;
+    position: absolute;
+    top: 2%
+}
+
+@media(min-width:1200px) {
+    #search {
+        width: 300px;
+        padding: 5px;
+        padding-left: 20px
+    }
+
+    .search-nav-item {
+        margin-left: 400px;
+        width: 350px
+    }
+
+    .fa-user-o {
+        margin-left: 300px
+    }
+
+    .text {
+        display: none
+    }
+
+    .fa-user-o,
+    .fa-shopping-cart {
+        font-size: 20px;
+        padding-left: 20px
+    }
+
+    #sidebar {
+        width: 30%;
+        padding: 20px;
+        float: left
+    }
+
+    #products {
+        width: 70%;
+        padding: 10px;
+        margin: 0;
+        float: right
+    }
+
+    .card {
+        width: 300px;
+        height: 330px;
+        border: none
+    }
+
+    .card-img-top {
+        width: 295px;
+        height: 200px;
+        border-radius: 10px
+    }
+
+    del {
+        padding-right: 2px
+    }
+
+    .filter,
+    #mobile-filter {
+        display: none
+    }
+}
+
+@media(min-width:992px) and (max-width:1199px) {
+    #search {
+        width: 300px;
+        padding: 5px;
+        padding-left: 20px
+    }
+
+    .search-nav-item {
+        margin-left: 200px;
+        width: 350px
+    }
+
+    .fa-user-o {
+        margin-left: 160px
+    }
+
+    .text {
+        display: none
+    }
+
+    #sidebar {
+        width: 30%;
+        padding: 20px;
+        float: left
+    }
+
+    #products {
+        width: 70%;
+        padding: 10px;
+        margin: 0;
+        float: right
+    }
+
+    .card {
+        width: 200px;
+        height: 330px;
+        border: none
+    }
+
+    .card-img-top {
+        width: 200px;
+        height: 200px;
+        border-radius: 10px
+    }
+
+    .fa-plus,
+    .fa-minus {
+        font-size: 12px
+    }
+
+    .sign {
+        height: 25px
+    }
+
+    .price {
+        width: 99px
+    }
+
+    .filter,
+    #mobile-filter {
+        display: none
+    }
+}
+
+@media(min-width:768px) and (max-width:991px) {
+    #search {
+        width: 300px;
+        padding: 5px;
+        padding-left: 20px
+    }
+
+    .search-nav-item {
+        margin-left: 60px;
+        width: 350px
+    }
+
+    .fa-user-o {
+        margin-left: 80px
+    }
+
+    .text {
+        display: none
+    }
+
+    #sidebar {
+        width: 35%;
+        padding: 20px;
+        float: left
+    }
+
+    #products {
+        width: 65%;
+        padding: 10px;
+        margin: 0;
+        float: right
+    }
+
+    .card {
+        border: none
+    }
+
+    .filter,
+    #mobile-filter {
+        display: none
+    }
+}
+
+@media(min-width:576px) and (max-width:767px) {
+    .text {
+        display: none
+    }
+
+    .search-nav-item {
+        margin-left: 35px;
+        width: 270px
+    }
+
+    #search {
+        width: 240px;
+        padding: 5px;
+        padding-left: 20px
+    }
+
+    .fa-search {
+        padding: 3px;
+        font-size: 18px
+    }
+
+    #sidebar {
+        width: 40%;
+        padding: 20px;
+        float: left
+    }
+
+    #products {
+        width: 60%;
+        padding: 10px;
+        margin: 0;
+        float: right
+    }
+
+    .card {
+        border: none
+    }
+
+    #off {
+        padding-left: 2px
+    }
+
+    #sorting span,
+    #res {
+        font-size: 14px
+    }
+
+    .filter,
+    #mobile-filter {
+        display: none
+    }
+}
+
+@media(max-width:575px) {
+    .search-nav-item {
+        margin: 0;
+        width: 100%;
+        margin-top: 10px
+    }
+
+    #search {
+        width: 80%;
+        padding-left: 10px;
+        margin-top: 10px;
+        padding-right: 10px
+    }
+
+    .fa-search {
+        padding: 10px;
+        font-size: 18px
+    }
+
+    #sidebar {
+        display: none
+    }
+
+    .filter {
+        margin-left: 70%;
+        margin-top: 2%
+    }
+
+    #sorting,
+    #res {
+        font-size: 12px;
+        margin-top: 2%
+    }
+}
+.tab-content{
+    display: none;
+}
+.active {
+    display: block;
+}
+
+.baseBlock {
+	margin: 0px 0px 35px 0px;
+	border-radius: 5px;
+	overflow: hidden;
+	background: #fff;
+	-moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.baseBlock:hover {
+	-webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+        <!-- <div class="filter"> <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span></button>
+        </div> -->
+        <div class="row mx-0">
+            <section id="sidebar">
+                <p> Home <b id="path"></b></p>
+                <div class="border-bottom pb-2 ml-2">
+                    <h4 id="burgundy">Filters</h4>
+                </div>
+                <div class="filter-tabs p-3">
+                    <div class="filter-tab-item pr-2" id="filter-tab-1"> <span class="fa fa-filter"></span>  
+                        <a href="#catagories" data-toggle="tab" role="tab" id="catagories" data-location="catagories" onclick="titleAnchorClicked(this)"><h6 class="font-weight-bold" id="tab-title-1"></h6>categories</h6></a>
+                        <div class="tab-content active px-2" id="tab-content-1">
+                            <%if(locals.tree){ %>
+                                <%Object.keys(locals.tree.catagories).forEach(key =>{%>
+                                    <div class="form-group" id="div-<%=key%>"><a href="#<%=key%>" data-toggle="tab" role="tab" id="<%=key%>" data-location="<%=key%>" onclick="anchorClicked(this)"><%=key%></a></div>
+                                  <%})%>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h6 class="h6 m-3 semi-bold">Price Filter</h6>
+                <div class="filter-fixed d-md-flex p-2 mb-2">                    
+                    <label  class="labels m-2" for="price-filter">min</label>
+                    <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="min-price">
+                    <label class="labels m-2" for="price-filter">max</label>
+                    <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="max-price">
+                </div>
+                <hr>
+                <div id="description-filter">
+
+                </div>
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter " onclick="filterPosts()">Filter<span class="fa fa-filter pl-1"></span></button>
+            </section>
+        
+            <section id="products">
+                <div class="container">
+                    <div class="row pb-5" id="posts-container">
+                        <%if(locals.posts){ posts.forEach((post)=>{%>
+                        <a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2" href="api/posts/<%=post.id%>">
+                            <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( <%=post.id.toString()%>" > -->
+                                <div class="card w-100 baseBlock" style="cursor: pointer;" > <img class="card-img-top" src="<%=post.image%>">
+                                    <div class="card-body Regular shadow ">
+                                        <h5><b><%=post.title%></b> </h5>
+                                        <div class="d-flex flex-row my-2">
+                                            <div class="text-muted text-success">
+                                                <strong class="text-success"><%=post.price%> $</strong>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </a>
+                        <%})}%>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+<script>
+    var respond;
+    var type_filter = [];
+    function anchorClicked(element) {
+            
+            $('.tab-content').removeClass('active');
+            
+            const list = element.dataset.location.split(",");
+            const type = Object.assign([], list);
+            let res = Object.assign({}, JSON.parse('<%- JSON.stringify(tree.catagories) %>'));
+            if(list[0] === "catagories"){
+                list.shift();
+            }
+            while(list[0] !== "catagories" && list.length>0){
+                res = res[list.shift()];
+            }  
+            const order = ++ $('.filter-tab-item').length;
+
+            const filter_tab =(type,parent)=>`<div class="filter-tab-item pr-2" id="filter-tab-${order}"> <span class="fa fa-filter"></span>  
+                                                    <a href="#${parent}" data-toggle="tab" role="tab" id="${parent}" data-location="${type}" onclick="titleAnchorClicked(this)"><h6 class="font-weight-bold" id="tab-title-1"></h6>${parent}</h6></a>
+                                                    <ul class="tab-content active px-2" id="tab-content-${order}">
+                                                    </ul>
+                                                </div>`;
+            $('.filter-tabs').append(filter_tab(type,element.id));   
+
+            const div=(type,key)=>`<li class="form-group" id="div-${key}"><a href="#${key}" data-toggle="tab" role="tab" id="${key}" data-location="${type}" onclick="anchorClicked(this)">${key}</a></li>`;
+
+            Object.keys(res).forEach(key =>{
+                type.push(key);
+                $(`#tab-content-${order}`).append(div(type,key));
+                type.pop();
+            });
+            $(`#path`).empty();
+            type.forEach(key =>{
+                $(`#path`).append(`> ${key} `);
+            });
+            if(type[0] === "catagories"){
+                type.shift();
+            }
+            $('#description-filter').empty();
+            if(res === ""){
+                getDescription(type);
+            }
+            type_filter = Object.assign([], type);
+            filterPosts(type);
+        }
+        function titleAnchorClicked(element) {
+            const id = element.id.toString();
+            const order = $('#'+element.parentElement.id).index() + 1 ;
+
+            $('#'+element.parentElement.id).nextAll('.filter-tab-item').remove();
+            $('#'+element.parentElement.id).remove();
+            
+            const list = element.dataset.location.split(",");
+            const type = Object.assign([], list);
+            let res = Object.assign({}, JSON.parse('<%- JSON.stringify(tree.catagories) %>'));
+            
+            if(list[0] === "catagories"){
+                list.shift();
+            }
+            while(list[0] !== "catagories" && list.length>0){
+                res = res[list.shift()];
+            }
+
+            const filter_tab =(type,parent)=>`<div class="filter-tab-item pr-2" id="filter-tab-${order}"> <span class="fa fa-filter"></span>  
+                                                    <a href="#${parent}" data-toggle="tab" role="tab" id="${parent}" data-location="${type}" onclick="titleAnchorClicked(this)"><h6 class="font-weight-bold" id="tab-title-1"></h6>${parent}</h6></a>
+                                                    <ul class="tab-content active px-2" id="tab-content-${order}">
+                                                    </ul>
+                                                </div>`;
+            $('.filter-tabs').append(filter_tab(type,id));   
+
+            const div=(type,key)=>`<li class="form-group" id="div-${key}"><a href="#${key}" data-toggle="tab" role="tab" id="${key}" data-location="${type}" onclick="anchorClicked(this)">${key}</a></li>`;
+
+            Object.keys(res).forEach(key =>{
+                type.push(key);
+                $(`#tab-content-${order}`).append(div(type,key));
+                type.pop();
+            });
+            type_filter = Object.assign([],type);
+            filterPosts(type);
+        }
+        function filterPosts(type){
+            if(!type){
+                type = type_filter;
+            }
+
+            const min_price = $('#min-price').val();
+            const max_price = $('#max-price').val();
+
+            url = "/api/posts/filter?";
+            if(type[0] === "catagories"){
+                type.shift();
+            }
+            console.log(type.length);
+            
+            if(type.length>0){
+                url += "type="+type.toString().replaceAll(",","-");
+            }
+            console.log(url);
+            if(min_price !== "" && min_price >= 0){ 
+                url += "&min_price="+min_price;
+            }
+            if(max_price !== "" && max_price >= 0){
+                url += "&max_price="+max_price;
+            }
+            if($('#description-filter').children().length > 0){
+                Object.keys(respond).forEach((key) =>{
+                        if(respond[key] === "String"){
+                            if($('#des-attr-'+key).val()){
+                                url += "&"+key+"="+$('#des-attr-'+key).val();
+                            }
+                        }else if(respond[key] === 1970){
+                            if($('#des-attr-'+key).val()){
+                                url += "&"+key+"="+$('#des-attr-'+key).val();
+                            }
+                        }else if(respond[key] === false){
+                            if($('#des-attr-'+key).is(':checked')){
+                                url += "&"+key+"="+$('#des-attr-'+key).is(':checked');
+                            }
+                        }
+                })
+            }
+            
+            $.ajax({
+                type: "GET",
+                cache: true,
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                Accept: "application/json charset=utf-8",
+                url: url,
+                success: function (response,status) {
+
+
+                    const _post =(post)=> `<a class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mt-2" href="api/posts/${post._id}">
+                            <!-- <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" onclick="getPost( ${post._id.toString()}" > -->
+                                <div class="card w-100 baseBlock" style="cursor: pointer;" > <img class="card-img-top" src="${post.image}">
+                                    <div class="card-body Regular shadow ">
+                                        <h5><b>${post.title}</b> </h5>
+                                        <div class="d-flex flex-row my-2">
+                                            <div class="text-muted text-success">
+                                                <strong class="text-success">${post.price} $</strong>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </a>`;
+                    $('#posts-container').empty();
+                    if(response && response.length>0){
+                        response.forEach(post =>{
+                            $('#posts-container').append(_post(post));
+                        });
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+        function getDescription(type){
+            url = "/api/posts/getObjectTemplate";
+            $.ajax({
+                type: "POST",
+                cache: false,
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                Accept: "application/json charset=utf-8",
+                url: url,
+                data : JSON.stringify({type:type}), 
+                success: function (response,status) {
+                    
+                    if(status=="success"){
+                    respond = response;
+                    
+                    const des_title = `<h6 class="h6 m-3 semi-bold">Description Filter</h6>`;
+                    const text_input=(s) =>`<div class="row">
+                                    <div class="col-md-6 m-2">
+                                    <label class="labels">${s}</label>
+                                    <input type="text" class="form-control" id="des-attr-${s}">
+                                    </div>
+                                </div>`;
+                    const number_input= (s) =>`<div class="row">
+                                    <div class="col-md-6 m-2">
+                                    <label class="labels">${s}</label>
+                                    <input type="number" class="form-control" id="des-attr-${s}">
+                                    </div>
+                                </div>`;
+                    const checkbox_input=(s) =>`<div class="row">
+                                    <div class="col-md-6 m-2">
+                                    <input class="form-check-input" type="checkbox" value="false" id="des-attr-${s}">
+                                    <label class="form-check-label" for="des-attr-${s}">${s}</label>
+                                    </div>
+                                </div>`;
+                    $('#description-filter').empty();
+                    $('#description-filter').append(des_title);
+                    Object.keys(response).forEach((key) =>{
+                        if(response[key]==="String"){
+                        $('#description-filter').append(text_input(key));
+                        }else if(response[key]===1970){
+                        $('#description-filter').append(number_input(key));
+                        }else if(response[key]===false){
+                        $('#description-filter').append(checkbox_input(key));
+                        }
+                    })
+                    }
+                    else{
+                        console.log("error");
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+</script>
+</body>
+</html>

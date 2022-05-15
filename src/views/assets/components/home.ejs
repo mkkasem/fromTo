@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--====== Title ======-->
+    <title>Home</title>
+    <link rel="icon" type="image/png" href="/images/fromto.svg ">
+
+    <!--====== Favicon ======-->
+    <link
+      rel="shortcut icon"
+      href="/images/favicon.ico"
+      type="image/png"
+    />
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+    <!--====== Lineicons CSS ======-->
+    <link rel="stylesheet" href="/css/lineicons.css" />
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="/scss/starter.css" />
+  </head>
+
+  <body>
+      <%- include("navbar");-%> 
+      <%- include("header");-%> 
+      <%- include("postMenu",posts);-%>
+      <%- include("footer"); -%>
+    <script src="/js/ejs.min.js"></script>
+  </body>
+</html>

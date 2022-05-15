@@ -1,5 +1,6 @@
 const vehicle = require('./catagories/vehicle/vehicleFactory');
 const realEstate = require('./catagories/real estate/realEstateFactory');
+const techFactory = require('./catagories/tech/techFactory');
 
 // error messages
 const generalError = 'invalid Item type';
@@ -15,6 +16,8 @@ class ItemFactory {
           return vehicle(newTypeSequence, obj);
         case 'real estate':
           return realEstate(newTypeSequence, obj);
+        case 'tech':
+          return techFactory(newTypeSequence, obj);
         default:
           break;
       }

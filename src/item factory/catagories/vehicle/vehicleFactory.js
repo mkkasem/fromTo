@@ -1,5 +1,7 @@
 const Car = require('./Car');
 const Van = require('./Van');
+const Bicycle = require('./Bicycle');
+const Motorcycle = require('./Motorcycle');
 
 // error messages
 const generalError = 'invalid vehicle type';
@@ -13,6 +15,10 @@ module.exports = (typeSequence, obj) => {
         return new Car(obj);
       case 'van':
         return new Van(obj);
+      case 'bicycle':
+        return new Bicycle(obj);
+      case 'motorcycle':
+        return new Motorcycle(obj);
       default:
         break;
     }

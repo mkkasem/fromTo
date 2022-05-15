@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-const isImageUrl = require('is-image-url');
-
-const validator = (url) => isImageUrl(url);
-const imageValidator = [validator, 'Please enter a valid image URL!'];
 
 const { Schema } = mongoose;
 
@@ -20,7 +16,7 @@ const postSchema = new Schema(
     title: {
       type: String,
       maxLength: [
-        30,
+        120,
         'Item name should have max length of 30 characters only.',
       ],
       required: [true, 'Item title is required'],
@@ -35,6 +31,11 @@ const postSchema = new Schema(
       type: Object,
       required: [true, 'Description is required'],
     },
+    status: {
+      type: String,
+      default: 'pending',
+      enum: ['pending', 'approved', 'rejected'],
+    },
     isSold: {
       type: Boolean,
       default: false,
@@ -42,7 +43,6 @@ const postSchema = new Schema(
     image: {
       type: String,
       required: [true, 'Item photo is required'],
-      validate: imageValidator,
     },
     price: {
       type: Number,

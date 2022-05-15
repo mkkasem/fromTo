@@ -3,20 +3,28 @@ class Car {
 
   color;
 
-  name;
+  model;
 
   modelYear;
 
-  statue;
+  new;
 
   constructor(obj) {
-    if (!obj || !obj.brand || !obj.color || !obj.name || !obj.modelYear)
+    if (!obj) {
+      this.brand = 'String';
+      this.color = 'String';
+      this.model = 'String';
+      this.modelYear = new Date('1970').getFullYear();
+      this.new = false;
+      return;
+    }
+    if (!obj || !obj.brand || !obj.color || !obj.model || !obj.modelYear)
       throw new Error('car description validation error');
     this.brand = obj.brand;
     this.color = obj.color;
-    this.name = obj.name;
+    this.model = obj.model;
     this.modelYear = obj.modelYear;
-    this.statue = obj.statue;
+    this.new = obj.new;
   }
 }
 

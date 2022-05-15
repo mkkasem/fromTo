@@ -1,10 +1,12 @@
+/* eslint-disable no-shadow */
 /* eslint-disable camelcase */
+const jwt = require('jsonwebtoken');
 const Post = require('../models/post');
-
 //  errors messages
 const authorizationError = { message: 'you dont have this authorization' };
-const randomError = { message: 'something went wrong' };
+// const randomError = { message: 'something went wrong' };
 const ItemFactory = require('../item factory/itemFactory');
+const itemTree = require('../item factory/catagoriesTree.json');
 
 const itemFactory = new ItemFactory();
 async function savePost(req, type = 'create') {
@@ -58,6 +60,22 @@ const filterPosts = async (res, query) => {
   }
 };
 module.exports = {
+  getAddPostPage: async (req, res) => {
+    const { token } = req.cookies;
+    let user;
+    if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
+    const loggedIn = !!user || false;
+    const tree = JSON.parse(JSON.stringify(itemTree));
+    res.render('addPost', { user, loggedIn, tree });
+  },
+  getObjectTemplate: async (req, res) => {
+    try {
+      const resp = itemFactory.createItem(req.body?.type);
+      return res.status(200).json(resp);
+    } catch (error) {
+      return res.status(422).json(error);
+    }
+  },
   updatePost: async (req, res) => {
     const { id } = req.params;
     try {
@@ -98,10 +116,10 @@ module.exports = {
         creator: req?.user?._id ?? null,
       };
       post.comments.push(newComment);
-      const updatedPost = await post.save();
-      return res.status(201).json(updatedPost);
+      await post.save();
+      return res.redirect(303, `/api/posts/${id}`);
     } catch (error) {
-      return res.status(403).json(randomError);
+      return res.status(403).json(error.message);
     }
   },
   updateComment: async (req, res) => {
@@ -113,8 +131,8 @@ module.exports = {
       //  check authority for the user
       if (id && req.user._id === comment.creator.toString()) {
         comment.text = text;
-        const updatedPost = await post.save();
-        return res.status(201).json(updatedPost);
+        await post.save();
+        return res.redirect(303, `/api/posts/${id}`);
       }
       throw authorizationError;
     } catch (error) {
@@ -126,11 +144,14 @@ module.exports = {
     try {
       const post = await Post.findById(id);
       const comment = post.comments.find((c) => c.id === commentid);
-      if (id && req.user._id === comment.creator.toString()) {
+      if (
+        id &&
+        (req.user._id === comment.creator.toString() || req.user.isAdmin)
+      ) {
         const indexOfComment = post.comments.indexOf(comment);
         post.comments.splice(indexOfComment, 1);
-        const updatedPost = await post.save();
-        return res.status(200).json(updatedPost);
+        await post.save();
+        return res.redirect(303, `/api/posts/${id}`);
       }
       throw authorizationError;
     } catch (error) {
@@ -141,7 +162,9 @@ module.exports = {
     try {
       const posts = await Post.find().sort({ createdAt: -1 });
       if (!posts) res.status(204).json({ message: `there are no posts` });
-      else res.status(200).json(posts);
+      const tree = JSON.parse(JSON.stringify(itemTree));
+      res.json({ posts, tree });
+      //  else res.status(200).render('home', { posts });
     } catch (err) {
       res.status(403).json({ message: err.message });
     }
@@ -150,25 +173,44 @@ module.exports = {
   getOnePost: async (req, res) => {
     const { id } = req.params;
     try {
-      const post = await Post.findById(id);
+      const { token } = req.cookies;
+      let user;
+      if (token) ({ user } = jwt.verify(token, process.env.JWT_SECRET));
+      const loggedIn = !!user || false;
+
+      // check if user is logged in from cookie
+      const post = await Post.findById(id)
+        .populate('owner')
+        .populate('comments.creator');
       if (!post)
         res
           .status(204)
           .json({ message: `The post you are looking for not found` });
-      else res.status(200).json(post);
+
+      return res.render('post', { post, loggedIn, user });
     } catch (err) {
-      res.status(403).json({ message: err.message });
+      return res.status(403).json({ message: err.message });
     }
   },
   addNewPost: async (req, res) => {
     try {
+      const { image } = req.files;
+
       req.post = new Post();
+
+      const urlImage = `/posts/${req.post.id}.${image.mimetype.split('/')[1]}`;
+      req.body.image = urlImage;
+
+      await image.mv(
+        `${__dirname}/../images/posts/${req.post.id}.${
+          image.mimetype.split('/')[1]
+        }`
+      );
+      req.body.description = JSON.parse(req.body.description);
+      req.body.price = parseFloat(req.body.price);
+      req.body.type = req.body.type.split(',');
       const newPost = await savePost(req);
-      /*
-    To add post the user needs to be registered(onlyAtuhenticated middleware check that)
-    All necessary validations are handled by quesion model
-    so we can save new post directly
-    */
+
       const postData = req.body;
       // Assign the new post to the current user
       postData.user = req.user.id;
@@ -196,9 +238,10 @@ module.exports = {
       const typeSecuence = type.split('-');
       const query = {
         $and: [
-          { type: { $in: typeSecuence } },
+          { type: { $all: typeSecuence } },
           { price: { $gte: min_price || 0 } },
           { price: { $lte: max_price || Infinity } },
+          { status: 'approved' },
         ],
       };
       // extract filter properties and add them to the query
@@ -226,6 +269,26 @@ module.exports = {
         $or: [{ title: { $regex: regEx } }, { type: { $regex: regEx } }],
       };
       filterPosts(res, query);
+    }
+  },
+  getPendingPosts: async (req, res) => {
+    const posts = await Post.find({ status: 'pending' });
+    res.render('pendingPosts', { user: req.user, loggedIn: true, posts });
+  },
+  setPostStatus: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      const post = await Post.findById(id);
+      if (status === 'rejected') {
+        await Post.findByIdAndDelete(id);
+        return res.redirect('/api/posts/pendingPosts');
+      }
+      post.status = status;
+      await post.save();
+      return res.redirect(303, `/api/posts/${id}`);
+    } catch (error) {
+      return res.redirect('/');
     }
   },
 };
