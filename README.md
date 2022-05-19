@@ -102,7 +102,7 @@ From to will help buy and sell anything using the website in Syria. In our Count
 
 ![Homepage](src/views/assets/frontend1.PNG)
 ![Homepage](src/views/assets/frontend2.PNG)
-![Homepage](src/views/assets/frontend3.png)
+![Homepage](src/views/assets/frontend3.PNG)
 
 <!-- GETTING STARTED -->
 
@@ -142,9 +142,7 @@ first you need to have node installed on your machine and then :
    http://localhost:3000/
    ```
    <p align="right">(<a href="#top">back to top</a>)</p>
-   ```
-
-<!-- Documentation -->
+   
 
 ## Team
 
